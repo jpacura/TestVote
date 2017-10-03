@@ -1,0 +1,50 @@
+.navi {
+    min-width: 350px;
+    margin-left: 0;
+    padding: 10px;
+    margin-bottom: 1em;
+    background: #000000;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 250px 0 rgba(0, 0, 0, 0.19);
+}
+
+.navi img {
+    padding: 5px;
+    width: 150px;
+    max-height:50px;
+}
+.navi .title{
+    padding: 0 3px;
+    display: flex;
+    flex-direction: row;
+    font-family: Arial, sans-serif;
+}
+
+
+.navi button {
+    margin: 2.3em 1.5em 0 0;
+    background: rgba(0, 0, 0, 0.96);
+    color: white;
+    height: 2.5em;
+    font-size: 0.6em;
+    font-weight: bold;
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+.navi button:hover {
+    background: white;
+    color: #000000;
+}
+
+@media screen and (max-width: 500px){
+    .navi img{
+        display: none;
+    }
+    .navi .title{
+        margin: 0 1em;
+    }
+}

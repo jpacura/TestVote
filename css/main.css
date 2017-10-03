@@ -1,0 +1,42 @@
+body {
+    width: 102%;
+    margin: 0;
+    padding: 0;
+    font-size: medium;
+    font-family: Arial, sans-serif;
+}
+
+.mainArea {
+    margin: 2em 3em;
+    min-width: 338px;
+}
+
+button {
+    margin: 1em;
+    background: white;
+    color: #F6A704;
+    border: 1px solid #F6A704;
+    font-size: 0.8em;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+button:hover {
+    background: #F6A704;
+    color: white;
+    border: 1px solid white;
+}
+
+button:focus {
+    outline: 0;
+}
+
+input:focus {
+    outline: 0;
+}
+
+@media screen and (max-width: 500px) {
+    .mainArea{
+        margin: 1em 0;
+    }
+}
