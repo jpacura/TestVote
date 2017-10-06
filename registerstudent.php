@@ -80,18 +80,25 @@
                            ng-model="user.confirm"
                            placeholder="Confirm Password..." required/>
                 </div>
-                <button type="submit" value="Register Student">Register Student</button>
+                <button type="button" value="Register Student" ng-click="register(user)">Register Student</button>
             </form>
         </div>
     </div>
+    <p>{{temp}}</p>
 </div>
 </body>
 
 <script>
     /*define a angular app here for further feature*/
     var myApp = angular.module('myApp', []);
-    myApp.controller('studentController', ['$scope', function ($scope) {
-//        leave an empty controller here for further building
+    myApp.controller('studentController', ['$scope', '$http', function ($scope, $http) {
+		$scope.register = function(user)
+		{
+			$scope.user.operation = "REGISTER";
+			$http.post("mysql-users.php", user).then(function(data, status) {
+                            $scope.temp = data.data;
+                        })
+		}  
     }]);
 </script>
 </html>

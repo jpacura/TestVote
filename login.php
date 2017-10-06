@@ -49,87 +49,33 @@
                            ng-model="user.password"
                            placeholder="password" required>
                 </div>
-                <button class="btn form-control" type=submit value="Login">Login</button>
+                <button class="btn form-control" type=button value="Login" ng-click="login(user)">Login</button>
             </form>
             <div class="registerLink">
-                <span><input type="checkbox">Remember me</span>
+                <!-- <span><input type="checkbox">Remember me</span> -->
                 <a href="registration.php">Register here</a>
             </div>
         </div>
     </div>
+    <p>{{temp}}</p>
 </div>
 
 
-<?php
-# input validation on password and username
-$username = new DOMElement('username');
-$doc = new DOMDocument();
-$alert = $doc->createElement("alert");
-$alert->appendChild(new DOMText(' ERROR: Username is blank'));
 
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $formerror = FALSE;
-
-    if (empty($_POST['username'])) # MAKE SURE USERNAME IS NOT EMPTY
-    {
-        $formerror = TRUE;
-//        echo "<div class=\"alert\">ERROR: Password is blank</div>";
-    }
-
-
-    if (empty($_POST['password'])) # MAKE SURE PASSWORD IS NOT EMPTY
-    {
-        $formerror = TRUE;
-//        echo "<div class=\"alert\">ERROR: Password is blank</div>";
-    }
-
-    #post request, current on semi data.
-
-    if (!$formerror) # MAKE SURE NO ERRORS
-    {
-        $servername = "localhost";
-        $username = "test1"; #semi user
-        $password = "123";      #semi password
-        $database = "testlogin1";
-        $conn = new mysqli($servername, $username, $password, $database);
-
-        $uname = $_POST['username'];
-        $checkifexists = "SELECT username FROM testlogin1 WHERE username = ?"; # SELECT QUERY TO MAKE SURE USER EXISTS (CANT LOG INTO ACCOUNT THAT DOESNT EXIST)
-        $query = $conn->prepare($checkifexists);
-        $query->bind_param('s', $uname);
-        $query->execute();
-        $doesexist = $query->get_result();
-        $numrows = $doesexist->num_rows;
-
-        if ($numrows == 0) {
-            echo "<br />ERROR: User does not exist!";
-        } else {
-            $getpasswd = "SELECT password FROM testlogin1 WHERE username = ?"; # SELECT QUERY TO GET PASSWORD FROM DATABASE
-            $query = $conn->prepare($getpasswd);
-            $query->bind_param('s', $uname);
-            $query->execute();
-            $query->bind_result($dbpwd);
-            $typedpwd = $_POST['password']; # GET PASSWORD THAT USER TYPED IN
-            $query->fetch();
-            if ($typedpwd == $dbpwd) # CHECK IF TYPED PASSWORD MATCHES THE ONE STORED IN THE DATABASE
-            {
-                echo "<br />Login Successful!";
-            } else {
-                echo "<br />Password Incorrect!";
-            }
-        }
-    }
-}
-?>
 
 </body>
 
 <script>
     /*define a angular app here for further feature*/
     var myApp = angular.module('myApp', []);
-    myApp.controller('loginController', ['$scope', function ($scope) {
-//        leave an empty controller here for further building
+    myApp.controller('loginController', ['$scope', '$http', function ($scope, $http) {
+		$scope.login = function(user)
+		{
+			$scope.user.operation = "LOGIN";
+			$http.post("mysql-users.php", user).then(function(data, status) {
+                            $scope.temp = data.data;
+                        })
+		}
     }]);
 </script>
 
