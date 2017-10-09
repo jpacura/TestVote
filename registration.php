@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="css/navibar.css">
     <link rel="stylesheet" href="css/registration.css">
 </head>
-<body ng-app="myApp">
+<body ng-app="VoteSys">
 <div class="navi">
     <div class="title">
         <img src="images/logoblack.svg">
         <h3 style="padding-top: 7px">Voting System</h3>
     </div>
 </div>
-<div class="mainArea" ng-controller="loginController">
+<div class="mainArea" ng-controller="registerController">
     <div class="user-line">
         <p>Create New User</p>
     </div>
@@ -68,7 +68,8 @@
                            class="form-control" ng-model="user.confirmPassword"
                            placeholder="confirm your password..." required/>
                 </div>
-                <button class="btn form-control" type="submit" value="Register"> Submit</button>
+                <button class="btn form-control" type="submit" value="Register"
+                        ng-disabled="registrationForm.$invalid" ng-click="register()">Submit</button>
             </form>
         </div>
     </div>
@@ -149,9 +150,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') # CHECK IF POST DATA EXISTS (ONLY IF S
 
 <script>
     /*define a angular app here for further feature*/
-    var myApp = angular.module('myApp', []);
-    myApp.controller('loginController', ['$scope', function ($scope) {
-//        leave an empty controller here for further building
+    var myApp = angular.module('VoteSys', []);
+    myApp.controller('registerController', ['$scope', '$http', function ($scope, $http) {
+        $scope.register = function () {
+
+            $scope.user.operation = "REGISTER";
+            var RegisterData = JSON.stringify($scope.user);
+
+            console.log("JSON sent to server:" + RegisterData);
+
+            $http({
+                method: 'POST',
+                url: './mysql-users.php',
+                data: RegisterData
+            })
+                .then(
+                    function successCallback(response) {
+                        console.log('server says:' + response.data);
+                        $scope.temp = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log(response.statusText);
+                        console.log("HTTP status code:" + response.status);
+                    })
+        }
     }]);
 </script>
 

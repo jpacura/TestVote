@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/registerstudent.css">
 </head>
 
-<body ng-app="myApp">
+<body ng-app="VoteSys">
 <div class="navi">
     <div class="title">
         <img src="images/logoblack.svg">
@@ -77,7 +77,8 @@
                     <input class="form-control" type="password" name="confirm" ng-model="school.confirm"
                            placeholder="Confirm Password..." required/>
                 </div>
-                <button type="submit" value="Register Student">Register School</button>
+                <button type="submit" value="Register Student"
+                        ng-disabled="registrationForm.$invalid" ng-click="register()" >Register School</button>
             </form>
         </div>
     </div>
@@ -85,9 +86,32 @@
 </body>
 <script>
     /*define a angular app here for further feature*/
-    var myApp = angular.module('myApp', []);
-    myApp.controller('schoolController', ['$scope', function ($scope) {
-//        leave an empty controller here for further building
+    var myApp = angular.module('VoteSys',[]);
+    myApp.controller('schoolController', ['$scope', '$http', function ($scope, $http) {
+
+        $scope.register = function () {
+
+            $scope.school.operation = "REGISTER";
+
+            var RegisterData = JSON.stringify($scope.school);
+
+            console.log("JSON sent to server:" + RegisterData);
+
+            $http({
+                method: 'POST',
+                url: './mysql-users.php',
+                data: RegisterData
+            })
+                .then(
+                    function successCallback(response) {
+                        console.log('server says:' + response.data);
+                        $scope.temp = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log(response.statusText);
+                        console.log("HTTP status code:" + response.status);
+                    })
+        }
     }]);
 </script>
 

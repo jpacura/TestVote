@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/navibar.css">
     <link rel="stylesheet" href="css/registerstudent.css">
 </head>
-<body ng-app="myApp">
+<body ng-app="VoteSys">
 <div class="navi">
     <div class="title">
         <img src="images/logoblack.svg">
@@ -80,25 +80,42 @@
                            ng-model="user.confirm"
                            placeholder="Confirm Password..." required/>
                 </div>
-                <button type="button" value="Register Student" ng-click="register(user)">Register Student</button>
+                <button type="button" value="Register Student"
+                        ng-disabled="registrationForm.$invalid" ng-click="register()">Register Student</button>
             </form>
         </div>
     </div>
-    <p>{{temp}}</p>
+    <p>{{temp}}</p> <!--test display here-->
 </div>
 </body>
 
 <script>
     /*define a angular app here for further feature*/
-    var myApp = angular.module('myApp', []);
+    var myApp = angular.module('VoteSys',[]);
     myApp.controller('studentController', ['$scope', '$http', function ($scope, $http) {
-		$scope.register = function(user)
-		{
-			$scope.user.operation = "REGISTER";
-			$http.post("mysql-users.php", user).then(function(data, status) {
-                            $scope.temp = data.data;
-                        })
-		}  
+
+        $scope.register = function () {
+
+            $scope.user.operation = "REGISTER";
+            var RegisterData = JSON.stringify($scope.user);
+
+            console.log("JSON sent to server:" + RegisterData);
+
+            $http({
+                method: 'POST',
+                url: './mysql-users.php',
+                data: RegisterData
+            })
+                .then(
+                    function successCallback(response) {
+                        console.log('server says:' + response.data);
+                        $scope.temp = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log(response.statusText);
+                        console.log("HTTP status code:" + response.status);
+                    })
+        }
     }]);
 </script>
 </html>

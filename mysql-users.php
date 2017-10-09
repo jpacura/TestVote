@@ -8,7 +8,7 @@
 	$operation = $data->operation;
 	
 	$servername = "localhost";
-	$username = "testvote";
+	$username = "testvote@gmail.com";
 	$password = "12345";
 	$database = "TestVote";
 	

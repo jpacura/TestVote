@@ -52,6 +52,7 @@
 
 .login .registerLink a {
     text-decoration: none;
+    color: black;
 }
 
 .login .registerLink a:visited {
@@ -59,7 +60,7 @@
 }
 
 .login .registerLink a:hover {
-    color: #1469ff;
+    color: #229cff;
 }
 
 .login .alert {

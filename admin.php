@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navibar.css">
 </head>
-<body ng-app="myApp">
+<body ng-app="VoteSys">
 <div class="navi">
     <div class="title">
         <img src="images/logoblack.svg">
