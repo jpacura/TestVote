@@ -75,7 +75,7 @@
 		
 		if($numrows == 0)
 		{
-			echo "{ \"error\" : false , \"errorcode\" : 1 , \"response\" : \"loginincorrect\" }";
+			echo "{ \"error\" : true , \"errorcode\" : 1 , \"response\" : \"loginincorrect\" }";
 		}
 		else
 		{
