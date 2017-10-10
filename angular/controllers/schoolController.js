@@ -11,7 +11,7 @@ myApp.controller('schoolController', ['$scope', '$http', function ($scope, $http
 
         $http({
             method: 'POST',
-            url: './mysql-users.php',
+            url: './mysql-schools.php',
             data: RegisterData
         })
             .then(

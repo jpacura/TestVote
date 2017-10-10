@@ -8,7 +8,7 @@
 	$operation = $data->operation;
 	
 	$servername = "localhost";
-	$username = "testvote@gmail.com";
+	$username = "testvote";
 	$password = "12345";
 	$database = "TestVote";
 	
@@ -40,7 +40,7 @@
 				$typedpwd = $post_password;
 				$typedpwd = hash('SHA512', $typedpwd);
 				
-				$register = "INSERT INTO users (Email, Password, Name, StudentID, Administrator) VALUES (:uname, :pw, :fname, :sid, 0)";
+				$register = "INSERT INTO users (Email, Password, Name, StudentID) VALUES (:uname, :pw, :fname, :sid)";
 				$query = $conn->prepare($register);
 				$query->bindParam(':uname', $post_username);
 				$query->bindParam(':pw', $typedpwd);
@@ -75,7 +75,7 @@
 		}
 		else
 		{
-			$getpasswd = "SELECT Password,ID FROM users WHERE Email = :uname";
+			$getpasswd = "SELECT Password,UserID FROM users WHERE Email = :uname";
 			$query = $conn->prepare($getpasswd);
 			$query->bindParam(':uname', $post_username);
 			$query->execute();
@@ -85,12 +85,12 @@
 			$typedpwd = hash('SHA512', $typedpwd);
 			if($typedpwd == $dbpwd)
 			{
-				$userid = $results['ID'];
+				$userid = $results['UserID'];
 				$rand = random_bytes(2048);
 				$token = "$post_username + $userid + $rand";
 				$token = hash('SHA512', $token);
 				
-				$expireoldtoken = "UPDATE tokens SET Expired = 1 WHERE UserID = :uid";
+				$expireoldtoken = "UPDATE tokens SET Expired = 1 WHERE UserID = :uid AND Expired = 0";
 				$query = $conn->prepare($expireoldtoken);
 				$query->bindParam(':uid', $userid);
 				$query->execute();
