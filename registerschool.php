@@ -82,11 +82,12 @@
                     <input class="form-control" type="password" name="confirm" ng-model="school.confirm"
                            placeholder="Confirm Password..." required password-match="school.password"/>
                 </div>
-                <button type="submit" value="Register Student"
-                        ng-disabled="registrationForm.$invalid" ng-click="register()" >Register School</button>
+                <button type="button" value="Register Student"
+                        ng-disabled="registrationForm.$invalid" ng-click="register(school)" >Register School</button>
             </form>
         </div>
     </div>
+    <p>{{temp}}</p> <!--test display here-->
 </div>
 </body>
 <script src="angular/controllers/myApp.js"></script>

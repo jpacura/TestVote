@@ -37,13 +37,17 @@
 		{
 			if($post_password == $post_confirm)
 			{
-				$typedpwd = $post_password;
+				$salt = random_bytes(2048);
+				$salt = hash('SHA512', $salt);
+				
+				$typedpwd = "$salt$post_password";
 				$typedpwd = hash('SHA512', $typedpwd);
 				
-				$register = "INSERT INTO users (Email, Password, Name, StudentID) VALUES (:uname, :pw, :fname, :sid)";
+				$register = "INSERT INTO users (Email, Password, Salt, Name, StudentID) VALUES (:uname, :pw, :salt, :fname, :sid)";
 				$query = $conn->prepare($register);
 				$query->bindParam(':uname', $post_username);
 				$query->bindParam(':pw', $typedpwd);
+				$query->bindParam(':salt', $salt);
 				$query->bindParam(':fname', $post_fullname);
 				$query->bindParam(':sid', $post_studentid);
 				$query->execute();
@@ -75,13 +79,14 @@
 		}
 		else
 		{
-			$getpasswd = "SELECT Password,UserID FROM users WHERE Email = :uname";
+			$getpasswd = "SELECT Password,Salt,UserID FROM users WHERE Email = :uname";
 			$query = $conn->prepare($getpasswd);
 			$query->bindParam(':uname', $post_username);
 			$query->execute();
 			$results = $query->fetch(PDO::FETCH_ASSOC);
 			$dbpwd = $results['Password'];
-			$typedpwd = $post_password;
+			$dbsalt = $results['Salt'];
+			$typedpwd = "$dbsalt$post_password";
 			$typedpwd = hash('SHA512', $typedpwd);
 			if($typedpwd == $dbpwd)
 			{
