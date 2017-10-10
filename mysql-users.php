@@ -92,8 +92,7 @@
 			{
 				$userid = $results['UserID'];
 				$rand = random_bytes(2048);
-				$token = "$post_username + $userid + $rand";
-				$token = hash('SHA512', $token);
+				$token = hash('SHA512', $rand);
 				
 				$expireoldtoken = "UPDATE tokens SET Expired = 1 WHERE UserID = :uid AND Expired = 0";
 				$query = $conn->prepare($expireoldtoken);
@@ -106,7 +105,10 @@
 				$query->bindParam(':token', $token);
 				$query->execute();
 				
-				echo "{ \"error\" : false, \"response\" : \"passwordcorrect\" , \"token\" : \"$token\"}";
+				setrawcookie("username", $post_username);
+				setrawcookie("token", $token);
+				
+				echo "{ \"error\" : false, \"response\" : \"passwordcorrect\" , \"username\" : \"$post_username\" , \"token\" : \"$token\"}";
 			}
 			else
 			{
