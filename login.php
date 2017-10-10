@@ -50,7 +50,8 @@
                            placeholder="password" required>
                 </div>
                 <button class="btn form-control" type=button value="Login"
-                       ng-disabled="loginForm.$invalid" ng-click="login()">Login</button>
+                        ng-disabled="loginForm.$invalid" ng-click="login()">Login
+                </button>
             </form>
             <div class="registerLink">
                 <!-- <span><input type="checkbox">Remember me</span> -->
@@ -63,36 +64,8 @@
 
 
 </body>
+<script src="angular/controllers/myApp.js"></script>
+<script src="angular/controllers/loginController.js"></script>
 
-<script>
-    /*define a angular app here for further feature*/
-    var myApp = angular.module('VoteSys',[]);
-    myApp.controller('loginController', ['$scope', '$http', function ($scope, $http) {
-
-        $scope.login = function () {
-
-            $scope.user.operation = "LOGIN";
-
-            var UserLoginData = JSON.stringify($scope.user);
-
-            console.log("JSON sent to server:" + UserLoginData);
-
-            $http({
-                method: 'POST',
-                url: './mysql-users.php',
-                data: UserLoginData
-            })
-                .then(
-                    function successCallback(response) {
-                        console.log('server says:' + response.data);
-                        $scope.temp = response.data;
-                    },
-                    function errorCallback(response) {
-                        console.log(response.statusText);
-                        console.log("HTTP status code:" + response.status);
-                    })
-        }
-    }]);
-</script>
 
 </html>

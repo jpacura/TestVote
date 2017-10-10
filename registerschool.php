@@ -74,8 +74,13 @@
                          registrationForm.confirm.$error.required">
                         Please confirm your password.
                     </div>
+                    <div class="alert"
+                         ng-show="registrationForm.confirm.$touched &&
+                         registrationForm.confirm.$invalid && !registrationForm.confirm.$error.required">
+                        Confirm password doesn't match.
+                    </div>
                     <input class="form-control" type="password" name="confirm" ng-model="school.confirm"
-                           placeholder="Confirm Password..." required/>
+                           placeholder="Confirm Password..." required password-match="school.password"/>
                 </div>
                 <button type="submit" value="Register Student"
                         ng-disabled="registrationForm.$invalid" ng-click="register()" >Register School</button>
@@ -84,35 +89,7 @@
     </div>
 </div>
 </body>
-<script>
-    /*define a angular app here for further feature*/
-    var myApp = angular.module('VoteSys',[]);
-    myApp.controller('schoolController', ['$scope', '$http', function ($scope, $http) {
-
-        $scope.register = function () {
-
-            $scope.school.operation = "REGISTER";
-
-            var RegisterData = JSON.stringify($scope.school);
-
-            console.log("JSON sent to server:" + RegisterData);
-
-            $http({
-                method: 'POST',
-                url: './mysql-users.php',
-                data: RegisterData
-            })
-                .then(
-                    function successCallback(response) {
-                        console.log('server says:' + response.data);
-                        $scope.temp = response.data;
-                    },
-                    function errorCallback(response) {
-                        console.log(response.statusText);
-                        console.log("HTTP status code:" + response.status);
-                    })
-        }
-    }]);
-</script>
-
+<script src="angular/controllers/myApp.js"></script>
+<script src="angular/controllers/schoolController.js"></script>
+<script src="angular/directives/passwordMatch.js"></script>
 </html>

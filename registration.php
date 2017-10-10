@@ -64,9 +64,14 @@
                         Please confirm your password.
                     </div>
                     <!---->
+                    <div class="alert"
+                         ng-show="registrationForm.confirm.$touched &&
+                         registrationForm.confirm.$invalid && !registrationForm.confirm.$error.required">
+                        Confirm password doesn't match.
+                    </div>
                     <input type=password name="confirm" id="confirm"
                            class="form-control" ng-model="user.confirmPassword"
-                           placeholder="confirm your password..." required/>
+                           placeholder="confirm your password..." required password-match="user.password"/>
                 </div>
                 <button class="btn form-control" type="submit" value="Register"
                         ng-disabled="registrationForm.$invalid" ng-click="register()">Submit</button>
@@ -147,34 +152,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') # CHECK IF POST DATA EXISTS (ONLY IF S
 ?> <!-- END OF PHP SCRIPT -->
 
 </body>
-
-<script>
-    /*define a angular app here for further feature*/
-    var myApp = angular.module('VoteSys', []);
-    myApp.controller('registerController', ['$scope', '$http', function ($scope, $http) {
-        $scope.register = function () {
-
-            $scope.user.operation = "REGISTER";
-            var RegisterData = JSON.stringify($scope.user);
-
-            console.log("JSON sent to server:" + RegisterData);
-
-            $http({
-                method: 'POST',
-                url: './mysql-users.php',
-                data: RegisterData
-            })
-                .then(
-                    function successCallback(response) {
-                        console.log('server says:' + response.data);
-                        $scope.temp = response.data;
-                    },
-                    function errorCallback(response) {
-                        console.log(response.statusText);
-                        console.log("HTTP status code:" + response.status);
-                    })
-        }
-    }]);
-</script>
+<script src="angular/controllers/myApp.js"></script>
+<script src="angular/controllers/registerController.js"></script>
+<script src="angular/directives/passwordMatch.js"></script>
 
 </html>
