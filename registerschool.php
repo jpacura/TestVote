@@ -22,12 +22,13 @@
         <p>School Registration</p>
     </div>
     <p class="user-note">
-        When you register a new school, you must first create an
-        administrator user. This user can add other administrators
-        as well as add other administrators.
+        When you register a new school, you will be added as the first administrator user. This user can add other administrators, as well as add other administrators.
     </p>
     <div class="registration">
         <div class="panel-body">
+			
+			<p class="ng-hide" id="tableerrortext" ng-show="isNotEnrolled">{{errtext}}</p>
+			
             <form novalidate class="input-field" name="registrationForm" method=post>
                 <div class="form-group">
                     <div class="alert"
@@ -37,50 +38,6 @@
                     </div>
                     <input class="form-control" type=text ng-model="school.schoolName"
                            name="schoolName" placeholder="Name of School..." required/>
-                </div>
-                <div class="form-group">
-                    <div class="alert"
-                         ng-show="registrationForm.adminName.$touched &&
-                         registrationForm.adminName.$error.required">
-                        Please input administration full name
-                    </div>
-                    <input class="form-control" type="text" ng-model="school.adminName"
-                           name="adminName" placeholder="Administrator Full Name..." required>
-                </div>
-                <div class="form-group">
-                    <div ng-show="registrationForm.email.$touched">
-                        <div class="alert" ng-show="registrationForm.email.$error.required">
-                            Email address can't be empty.
-                        </div>
-                        <div class="alert" ng-show="registrationForm.email.$error.email">
-                            Please input valid email address.
-                        </div>
-                    </div>
-                    <input class="form-control" type="text" name="email" ng-model="school.email"
-                           placeholder="Administrator Email Address..." required/>
-                </div>
-                <div class="form-group">
-                    <div class="alert"
-                         ng-show="registrationForm.password.$touched &&
-                        registrationForm.password.$error.required">
-                        Password can't be empty.
-                    </div>
-                    <input class="form-control" type="password" name="password" ng-model="school.password"
-                           placeholder="Administrator Password..." required/>
-                </div>
-                <div class="form-group">
-                    <div class="alert"
-                         ng-show="registrationForm.confirm.$touched &&
-                         registrationForm.confirm.$error.required">
-                        Please confirm your password.
-                    </div>
-                    <div class="alert"
-                         ng-show="registrationForm.confirm.$touched &&
-                         registrationForm.confirm.$invalid && !registrationForm.confirm.$error.required">
-                        Confirm password doesn't match.
-                    </div>
-                    <input class="form-control" type="password" name="confirm" ng-model="school.confirm"
-                           placeholder="Confirm Password..." required password-match="school.password"/>
                 </div>
                 <button type="button" value="Register Student"
                         ng-disabled="registrationForm.$invalid" ng-click="register(school)" >Register School</button>
@@ -92,5 +49,4 @@
 </body>
 <script src="angular/controllers/myApp.js"></script>
 <script src="angular/controllers/schoolController.js"></script>
-<script src="angular/directives/passwordMatch.js"></script>
 </html>

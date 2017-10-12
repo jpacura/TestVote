@@ -19,6 +19,7 @@
 <div class="mainArea" ng-controller="loginController">
     <div class="login">
         <div class="panel-body">
+			<p class="ng-hide" id="formerrortext" ng-show="isFormError">{{errtext}}</p>
             <img src="images/logo.svg">
             <form novalidate class="input-field" name="loginForm" method=post>
                 <!--form validation by angular-->
@@ -55,11 +56,10 @@
             </form>
             <div class="registerLink">
                 <!-- <span><input type="checkbox">Remember me</span> -->
-                <a href="registration.php">New to NYITVoting? Register here!</a>
+                <a href="register.php">New to NYITVoting? Register here!</a>
             </div>
         </div>
     </div>
-    <p>{{temp}}</p> <!--for test display-->
 </div>
 
 

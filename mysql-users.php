@@ -121,13 +121,94 @@
 	else if ($operation == "LOGOUT")
 	{
 		// LOG OUT
+		session_unset();
+		session_destroy();
 	}
 	else if ($operation == "TOKEN")
 	{
 		// USER ALREADY LOGGED IN, VERIFY TOKEN
+		if(isTokenValid())
+		{
+			// LOGGED IN
+			echo "{ \"error\" : false , \"response\" : \"loggedin\" }";
+		}
+		else
+		{
+			// NOT LOGGED IN
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
 	}
 	else
 	{
 		// INVALID OPERATION
 		echo "{ \"error\" : true , \"errorcode\" : 0 , \"response\" : \"invalidoperation\" }";
+	}
+	
+	function isTokenValid()
+	{
+		global $servername, $database, $username, $password;
+		
+		if(isset($_SESSION["username"]) && isset($_SESSION["token"]))
+		{
+			$session_username = $_SESSION["username"];
+			$session_token = $_SESSION["token"];
+			
+			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+			
+			$checkusername = "SELECT UserID FROM users WHERE Email = :uname";
+			
+			$query = $conn->prepare($checkusername);
+			$query->bindParam(':uname', $session_username);
+			$query->execute();
+			$numrows = $query->rowCount();
+			
+			if($numrows == 0)
+			{
+				// THE USER SPECIFIED IN THE TOKEN DOES NOT EXIST
+				session_unset();
+				session_destroy();
+				return 0;
+			}
+			else
+			{
+				// THE USER EXISTS, CHECK IF TOKEN IS EXISTS
+				$uid = $query->fetchColumn();
+				$gettoken = "SELECT Token FROM tokens WHERE UserID = :uid AND Expired = 0";
+				$query = $conn->prepare($gettoken);
+				$query->bindParam(':uid', $uid);
+				$query->execute();
+				$numrows = $query->rowCount();
+				
+				if($numrows == 0)
+				{
+					// THE USER HAS NO VALID TOKENS
+					session_unset();
+					session_destroy();
+					return 0;
+				}
+				else
+				{
+					// THE USER HAS A VALID TOKEN
+					// CHECK WHETHER IT MATCHES THE SENT TOKEN
+					
+					$mysql_token = $query->fetchColumn();
+					
+					if($session_token == $mysql_token)
+					{
+						return 1;
+					}
+					else
+					{
+						session_unset();
+						session_destroy();
+						return 0;
+					}
+				}
+			}
+			
+		}
+		else
+		{
+			return 0;
+		}
 	}

@@ -17,10 +17,6 @@
 	</div>
 	
 	<div ng-controller="selectSchoolController">
-		<button class="btn form-control" type=button value="TEST"
-			ng-click="listSchools()">TEST
-		</button>
-		
 		<p class="ng-hide" id="tableerrortext" ng-show="isNotEnrolled">{{errtext}}</p>
 		<table class="ng-hide" rules=all frame=border ng-show="isTableVisible">
 			<tr><th>School Name:</th><th>Go to School:</th><th>Remove School:</th></tr>
