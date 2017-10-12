@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
 	header("Access-Control-Allow-Origin: *");
 	header("Content-Type: application/json; charset=UTF-8");
 	
@@ -105,8 +107,8 @@
 				$query->bindParam(':token', $token);
 				$query->execute();
 				
-				setrawcookie("username", $post_username);
-				setrawcookie("token", $token);
+				$_SESSION["username"] = $post_username;
+				$_SESSION["token"] = $token;
 				
 				echo "{ \"error\" : false, \"response\" : \"passwordcorrect\" , \"username\" : \"$post_username\" , \"token\" : \"$token\"}";
 			}

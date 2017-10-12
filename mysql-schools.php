@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
 	header("Access-Control-Allow-Origin: *");
 	header("Content-Type: application/json; charset=UTF-8");
 	
@@ -145,13 +147,13 @@
 		if(isTokenValid())
 		{
 			// USER IS PROPERLY LOGGED IN, RETURN TABLE
-			$cookie_username = $_COOKIE['username'];
+			$session_username = $_SESSION["username"];
 			
 			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 			
 			$getuserid = "SELECT UserID FROM users WHERE Email = :uname";
 			$query = $conn->prepare($getuserid);
-			$query->bindParam(':uname', $cookie_username);
+			$query->bindParam(':uname', $session_username);
 			$query->execute();
 			$userid = $query->fetchColumn();
 			
@@ -248,25 +250,25 @@
 	{
 		global $servername, $database, $username, $password;
 		
-		if(isset($_COOKIE['username']) && isset($_COOKIE['token']))
+		if(isset($_SESSION["username"]) && isset($_SESSION["token"]))
 		{
-			$cookie_username = $_COOKIE['username'];
-			$cookie_token = $_COOKIE['token'];
+			$session_username = $_SESSION["username"];
+			$session_token = $_SESSION["token"];
 			
 			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 			
 			$checkusername = "SELECT UserID FROM users WHERE Email = :uname";
 			
 			$query = $conn->prepare($checkusername);
-			$query->bindParam(':uname', $cookie_username);
+			$query->bindParam(':uname', $session_username);
 			$query->execute();
 			$numrows = $query->rowCount();
 			
 			if($numrows == 0)
 			{
 				// THE USER SPECIFIED IN THE TOKEN DOES NOT EXIST
-				setrawcookie("username", "");
-				setrawcookie("token", "");
+				session_unset();
+				session_destroy();
 				return 0;
 			}
 			else
@@ -282,8 +284,8 @@
 				if($numrows == 0)
 				{
 					// THE USER HAS NO VALID TOKENS
-					setrawcookie("username", "");
-					setrawcookie("token", "");
+					session_unset();
+					session_destroy();
 					return 0;
 				}
 				else
@@ -293,14 +295,14 @@
 					
 					$mysql_token = $query->fetchColumn();
 					
-					if($cookie_token == $mysql_token)
+					if($session_token == $mysql_token)
 					{
 						return 1;
 					}
 					else
 					{
-						setrawcookie("username", "");
-						setrawcookie("token", "");
+						session_unset();
+						session_destroy();
 						return 0;
 					}
 				}
