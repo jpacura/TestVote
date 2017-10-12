@@ -49,4 +49,50 @@ myApp.controller('selectSchoolController', ['$scope', '$http', function ($scope,
 				console.log(response.statusText);
 				console.log("HTTP status code:" + response.status);
 			})
+			
+		$scope.removeschool = function (schoolid) {
+
+			var UserLoginData = "{\"operation\" : \"LEAVESCHOOL\", \"schoolID\" : " + schoolid + "}";
+
+			console.log("JSON sent to server:" + UserLoginData);
+
+			$http({
+				method: 'POST',
+				url: './mysql-schools.php',
+				data: UserLoginData
+			})
+				.then(
+					function successCallback(response) {
+						console.log('server says:' + response.data);
+						
+						if(response.data.error)
+						{
+							// THERE IS AN ERROR
+							
+							var errout = "ERROR: UNKNOWN SERVER ERROR!";
+							if(response.data.errorcode == 5)
+							{
+								// NOT LOGGED IN
+								window.location.href = "logout.php";
+							}
+							else if(response.data.errorcode == 7)
+							{
+								// LAST ADMINISTRATOR
+								errout = "You are the only administrator for this school. Please delete this school from the Administrators Panel";
+							}
+							
+							$scope.deleteerrtext = errout;
+							$scope.isDeleteError = true;
+						}
+						else
+						{
+							// NO ERRORS
+							window.location.href = "schools.php";
+						}
+					},
+					function errorCallback(response) {
+						console.log(response.statusText);
+						console.log("HTTP status code:" + response.status);
+					})
+		}
 }]);

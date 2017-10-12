@@ -117,6 +117,84 @@
 		}
 		
 	}
+	else if ($operation == "LEAVESCHOOL")
+	{
+		// LEAVE A SCHOOL THAT YOU ARE ENROLLED IN
+		
+		if(isTokenValid())
+		{
+			// LOGGED IN
+			
+			$post_username = $_SESSION["username"];
+			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+			
+			// GET USERS ID FROM MYSQL
+			$getuserid = "SELECT UserID FROM users WHERE Email = :uname";
+			$query = $conn->prepare($getuserid);
+			$query->bindParam(':uname', $post_username);
+			$query->execute();
+			$mysql_userid = $query->fetchColumn();
+			
+			// GET SCHOOL ID FROM POST DATA
+			$post_schoolID = $data->schoolID;
+			
+			// GET ENROLLMENT FROM MYSQL
+			$getenrollment = "SELECT Administrator, ID FROM enrollment WHERE SchoolID = :sid AND UserID = :uid";
+			$query = $conn->prepare($getenrollment);
+			$query->bindParam(':sid', $post_schoolID);
+			$query->bindParam(':uid', $mysql_userid);
+			$query->execute();
+			$results = $query->fetch(PDO::FETCH_ASSOC);
+			$is_administrator = $results['Administrator'];
+			$enrollment_id = $results['ID'];
+			
+			// CHECK IF ADMINISTRATOR
+			if($is_administrator)
+			{
+				// USER IS ADMINISTRATOR
+				
+				// CHECK IF THERE ARE MORE ADMINISTRATORS
+				$countadministrators = "SELECT ID FROM enrollment WHERE SchoolID = :sid AND Administrator = 1";
+				$query = $conn->prepare($countadministrators);
+				$query->bindParam(':sid', $post_schoolID);
+				$query->execute();
+				$numrows = $query->rowCount();
+				
+				if($numrows < 2)
+				{
+					// USER IS ONLY ADMINISTRATOR
+					echo "{ \"error\" : true , \"errorcode\" : 7 , \"response\" : \"lastadministrator\" }";
+				}
+				else
+				{
+					// THERE IS ANOTHER ADMINISTRATOR
+					// DELETE ENROLLMENT
+					$deleteenrollment = "DELETE FROM enrollment WHERE ID = :eid";
+					$query = $conn->prepare($deleteenrollment);
+					$query->bindParam(':eid', $enrollment_id);
+					$query->execute();
+					
+					echo "{ \"error\" : false , \"response\" : \"leftschool\" }";
+				}
+			}
+			else
+			{
+				// USER IS NOT ADMINISTRATOR
+				// DELETE ENROLLMENT
+				$deleteenrollment = "DELETE FROM enrollment WHERE ID = :eid";
+				$query = $conn->prepare($deleteenrollment);
+				$query->bindParam(':eid', $enrollment_id);
+				$query->execute();
+				
+				echo "{ \"error\" : false , \"response\" : \"leftschool\" }";
+			}
+		}
+		else
+		{
+			// NOT LOGGED IN
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
+	}
 	else
 	{
 		// INVALID OPERATION

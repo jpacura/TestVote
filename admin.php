@@ -18,10 +18,8 @@
 
 <div class="mainArea" ng-controller="loginController">
     <h1>Administrative Panel:</h1>
-    <p>
-        New York Institute of Technology
-      <!-- <?php echo $schoolname; ?> -->
-    </p> <!-- LOAD SCHOOL NAME FROM MYSQL LATER -->
+    
+    
 
     <div class="linklist">
         <a href="admin/elections.php">Manage Elections</a><br/>
@@ -29,30 +27,6 @@
         <a href="admin/administrators.php">Manage Administrators</a>
     </div>
 
-    <div>
-        <table> <!-- LOAD THESE VALUES FROM MYSQL LATER -->
-            <tr>
-                <td>Number of Created Elections:</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>Number of Active Elections:</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>Number of Created Students:</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>Number of Active Students:</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>Number of Administrators:</td>
-                <td>0</td>
-            </tr>
-        </table>
-    </div>
 </div>
 </body>
 
