@@ -18,7 +18,26 @@ myApp.controller('loginController', ['$scope', '$http', function ($scope, $http)
             .then(
                 function successCallback(response) {
                     console.log('server says:' + response.data);
-                    $scope.temp = response.data;
+                    
+                    if(response.data.error)
+					{
+						// THERE IS AN ERROR
+						
+						var errout = "ERROR: UNKNOWN SERVER ERROR!";
+						if(response.data.errorcode == 1)
+						{
+							// LOGIN INCORRECT
+							errout = "Incorrect Password!";
+						}
+						
+						$scope.errtext = errout;
+						$scope.isFormError = true;
+					}
+					else
+					{
+						// NO ERRORS
+						window.location.href = "schools.php";
+					}
                 },
                 function errorCallback(response) {
                     console.log(response.statusText);
