@@ -17,18 +17,26 @@
 	</div>
 	
 	<div ng-controller="selectSchoolController">
+		<h2>Welcome, {{studentusername}}</h2>
 		<p class="ng-hide" id="deleteerrortext" ng-show="isDeleteError">{{deleteerrtext}}</p>
 		<p class="ng-hide" id="tableerrortext" ng-show="isNotEnrolled">{{errtext}}</p>
 		<table class="ng-hide" rules=all frame=border ng-show="isTableVisible">
 			<tr><th>School Name:</th><th>Go to School:</th><th>Remove School:</th></tr>
 			<tr ng-repeat="x in tabledata">
 				<td>{{x.Name}}</td>
-				<td ng-if="x.Administrator == 0"><a href="" ng-click="gotoschool(x.SchoolID)">Go to Elections</a></td>
-				<td ng-if="x.Administrator == 1"><a href="" ng-click="gotoadmin(x.SchoolID)">Administrator Panel</a></td>
-				<td><a href="" ng-click="removeschool(x.SchoolID)">Remove School</a></td>
+				<td ng-if="x.Administrator == 0"><a href="" ng-click="election(x.Username)">Go to Elections</a></td>
+				<td ng-if="x.Administrator == 1"><a href="" ng-click="admin(x.Username)">Administrator Panel</a></td>
+				<td><a href="" ng-click="removeschool(x.Username, x.Name)">Remove School</a></td>
 				
 			</tr>
 		</table>
+		<br>
+		<button onclick="window.location.href='./enroll.php'">Enroll in a School</button>
+		
+		<!-- INVISIBLE FORM FOR POST DATA -->
+		<form method="post" id="gotopage" action="">
+			<input type="hidden" id="schoolnamepost" name="school">
+		</form>
 	</div>
 	
 </body>

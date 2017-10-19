@@ -23,13 +23,14 @@
 			// LOGGED IN
 			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 		
-			$post_schoolname = $data->schoolName;
+			$post_schoolname = $data->schoolFullName;
+			$post_schoolusername = $data->schoolUsername;
 			$post_username = $_SESSION["username"];
 			
 			// MAKE SURE NEW SCHOOL DOES NOT ALREADY EXIST
-			$checkifschoolexists = "SELECT Name FROM schools WHERE Name = :sname";
+			$checkifschoolexists = "SELECT Username FROM schools WHERE Username = :uname";
 			$query = $conn->prepare($checkifschoolexists);
-			$query->bindParam(':sname', $post_schoolname);
+			$query->bindParam(':uname', $post_schoolusername);
 			$query->execute();
 			$numrows = $query->rowCount();
 			
@@ -40,9 +41,10 @@
 			else
 			{
 				// ADD SCHOOL TO MYSQL
-				$register = "INSERT INTO schools (Name) VALUES (:name)";
+				$register = "INSERT INTO schools (Name, Username) VALUES (:name, :uname)";
 				$query = $conn->prepare($register);
 				$query->bindParam(':name', $post_schoolname);
+				$query->bindParam(':uname', $post_schoolusername);
 				$query->execute();
 				
 				// GET USERS ID FROM MYSQL
@@ -86,13 +88,15 @@
 			
 			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 			
-			$getuserid = "SELECT UserID FROM users WHERE Email = :uname";
+			$getuserid = "SELECT UserID,Name FROM users WHERE Email = :uname";
 			$query = $conn->prepare($getuserid);
 			$query->bindParam(':uname', $session_username);
 			$query->execute();
-			$userid = $query->fetchColumn();
+			$results = $query->fetch(PDO::FETCH_ASSOC);
+			$userid = $results['UserID'];
+			$mysql_username = $results['Name'];
 			
-			$getschools = "SELECT schools.Name, schools.SchoolID, enrollment.Administrator FROM users INNER JOIN enrollment ON users.UserID = enrollment.UserID INNER JOIN schools ON enrollment.SchoolID = schools.SchoolID WHERE users.UserID = :uid";
+			$getschools = "SELECT schools.Name, schools.Username, enrollment.Administrator FROM users INNER JOIN enrollment ON users.UserID = enrollment.UserID INNER JOIN schools ON enrollment.SchoolID = schools.SchoolID WHERE users.UserID = :uid";
 			$query = $conn->prepare($getschools);
 			$query->bindParam(':uid', $userid);
 			$query->execute();
@@ -107,7 +111,7 @@
 			{
 				$tabledata = $query->fetchAll(PDO::FETCH_ASSOC);
 				$tabledata = json_encode($tabledata);
-				echo "{ \"error\" : false , \"schools\" : $tabledata }";
+				echo "{ \"error\" : false , \"name\" : \"$mysql_username\" , \"schools\" : $tabledata }";
 			}
 		}
 		else
@@ -135,8 +139,14 @@
 			$query->execute();
 			$mysql_userid = $query->fetchColumn();
 			
-			// GET SCHOOL ID FROM POST DATA
-			$post_schoolID = $data->schoolID;
+			// GET SCHOOL USERNAME FROM POST DATA
+			$post_schoolusername = $data->schoolusername;
+			$getschoolid = "SELECT SchoolID FROM schools WHERE Username = :uname";
+			$query = $conn->prepare($getschoolid);
+			$query->bindParam(':uname', $post_schoolusername);
+			$query->execute();
+			$post_schoolID = $query->fetchColumn();
+			
 			
 			// GET ENROLLMENT FROM MYSQL
 			$getenrollment = "SELECT Administrator, ID FROM enrollment WHERE SchoolID = :sid AND UserID = :uid";
@@ -187,6 +197,76 @@
 				$query->execute();
 				
 				echo "{ \"error\" : false , \"response\" : \"leftschool\" }";
+			}
+		}
+		else
+		{
+			// NOT LOGGED IN
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
+	}
+	else if ($operation == "ENROLL")
+	{
+		// ENROLL IN AN EXISTING SCHOOL
+		
+		if(isTokenValid())
+		{
+			// LOGGED IN
+			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+		
+			$post_schoolusername = $data->username;
+			$post_username = $_SESSION["username"];
+			
+			// MAKE SURE SCHOOL ALREADY EXISTS
+			$checkifschoolexists = "SELECT Username FROM schools WHERE Username = :uname";
+			$query = $conn->prepare($checkifschoolexists);
+			$query->bindParam(':uname', $post_schoolusername);
+			$query->execute();
+			$numrows = $query->rowCount();
+			
+			if($numrows == 0)
+			{
+				echo "{ \"error\" : true , \"errorcode\" : 8 , \"response\" : \"schooldoesnotexist\" }";
+			}
+			else
+			{
+				// GET USERS ID FROM MYSQL
+				$getuserid = "SELECT UserID FROM users WHERE Email = :uname";
+				$query = $conn->prepare($getuserid);
+				$query->bindParam(':uname', $post_username);
+				$query->execute();
+				$mysql_userid = $query->fetchColumn();
+				
+				// GET SCHOOLS ID FROM MYSQL
+				$getschoolid = "SELECT SchoolID FROM schools WHERE Username = :name";
+				$query = $conn->prepare($getschoolid);
+				$query->bindParam(':name', $post_schoolusername);
+				$query->execute();
+				$mysql_schoolid = $query->fetchColumn();
+				
+				// MAKE SURE USER IS NOT ALREADY ENROLLED
+				$checkenrollment = "Select SchoolID FROM enrollment WHERE UserID = :uid AND SchoolID = :sid";
+				$query = $conn->prepare($checkenrollment);
+				$query->bindParam(':uid', $mysql_userid);
+				$query->bindParam(':sid', $mysql_schoolid);
+				$query->execute();
+				$numrows = $query->rowCount();
+				
+				if($numrows == 0)
+				{
+					// ENROLL USER INTO SCHOOL
+					$makeadministrator = "INSERT INTO enrollment (UserID, SchoolID, Administrator) VALUES (:uid, :sid, 0)";
+					$query = $conn->prepare($makeadministrator);
+					$query->bindParam(':uid', $mysql_userid);
+					$query->bindParam(':sid', $mysql_schoolid);
+					$query->execute();
+					echo "{ \"error\" : false, \"response\" : \"enrolled\"}";
+				}
+				else
+				{
+					// ALREADY ENROLLED
+					echo "{ \"error\" : true , \"errorcode\" : 9 , \"response\" : \"alreadyenrolled\" }";
+				}
 			}
 		}
 		else

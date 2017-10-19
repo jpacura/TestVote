@@ -31,19 +31,27 @@
             <form novalidate class="input-field" name="registrationForm" method=post>
                 <div class="form-group">
                     <div class="alert"
-                         ng-show="registrationForm.schoolName.$touched &&
-                         registrationForm.schoolName.$error.required">
-                        Please input school name.
+                         ng-show="registrationForm.schoolFullName.$touched &&
+                         registrationForm.schoolFullName.$error.required">
+                        Please input school full name.
                     </div>
-                    <input class="form-control" type=text ng-model="school.schoolName"
-                           name="schoolName" placeholder="Name of School..." required/>
+                    <input class="form-control" type=text ng-model="school.schoolFullName"
+                           name="schoolFullName" placeholder="School Full Name" required/>
+                </div>
+                <div class="form-group">
+                    <div class="alert"
+                         ng-show="registrationForm.schoolUsername.$touched &&
+                         registrationForm.schoolUsername.$error.required">
+                        Please input school username.
+                    </div>
+                    <input class="form-control" type=text ng-model="school.schoolUsername"
+                           name="schoolUsername" placeholder="School Username" required/>
                 </div>
                 <button type="button" value="Register Student"
                         ng-disabled="registrationForm.$invalid" ng-click="register(school)" >Register School</button>
             </form>
         </div>
     </div>
-    <p>{{temp}}</p> <!--test display here-->
 </div>
 </body>
 <script src="angular/controllers/myApp.js"></script>
