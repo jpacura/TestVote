@@ -38,7 +38,7 @@ myApp.controller('selectSchoolController', ['$scope', '$http', function ($scope,
 				else
 				{
 					// NO ERRORS
-					
+					$scope.studentusername = response.data.name;
 					$scope.isNotEnrolled = false;
 					$scope.isTableVisible = true;
 				}
@@ -50,49 +50,68 @@ myApp.controller('selectSchoolController', ['$scope', '$http', function ($scope,
 				console.log("HTTP status code:" + response.status);
 			})
 			
-		$scope.removeschool = function (schoolid) {
+		$scope.removeschool = function (schoolid, schoolname) {
 
-			var UserLoginData = "{\"operation\" : \"LEAVESCHOOL\", \"schoolID\" : " + schoolid + "}";
+			var UserLoginData = "{\"operation\" : \"LEAVESCHOOL\", \"schoolusername\" : \"" + schoolid + "\" }";
 
 			console.log("JSON sent to server:" + UserLoginData);
-
-			$http({
-				method: 'POST',
-				url: './mysql-schools.php',
-				data: UserLoginData
-			})
-				.then(
-					function successCallback(response) {
-						console.log('server says:' + response.data);
-						
-						if(response.data.error)
-						{
-							// THERE IS AN ERROR
+			
+			var c = window.confirm("Are you sure that you would like to delete the school " + schoolname + "?");
+			
+			if(c)
+			{
+				$http({
+					method: 'POST',
+					url: './mysql-schools.php',
+					data: UserLoginData
+				})
+					.then(
+						function successCallback(response) {
+							console.log('server says:' + response.data);
 							
-							var errout = "ERROR: UNKNOWN SERVER ERROR!";
-							if(response.data.errorcode == 5)
+							if(response.data.error)
 							{
-								// NOT LOGGED IN
-								window.location.href = "logout.php";
+								// THERE IS AN ERROR
+								
+								var errout = "ERROR: UNKNOWN SERVER ERROR!";
+								if(response.data.errorcode == 5)
+								{
+									// NOT LOGGED IN
+									window.location.href = "logout.php";
+								}
+								else if(response.data.errorcode == 7)
+								{
+									// LAST ADMINISTRATOR
+									errout = "You are the only administrator for this school. Please delete this school from the Administrators Panel";
+								}
+								
+								$scope.deleteerrtext = errout;
+								$scope.isDeleteError = true;
 							}
-							else if(response.data.errorcode == 7)
+							else
 							{
-								// LAST ADMINISTRATOR
-								errout = "You are the only administrator for this school. Please delete this school from the Administrators Panel";
+								// NO ERRORS
+								window.location.href = "schools.php";
 							}
-							
-							$scope.deleteerrtext = errout;
-							$scope.isDeleteError = true;
-						}
-						else
-						{
-							// NO ERRORS
-							window.location.href = "schools.php";
-						}
-					},
-					function errorCallback(response) {
-						console.log(response.statusText);
-						console.log("HTTP status code:" + response.status);
-					})
+						},
+						function errorCallback(response) {
+							console.log(response.statusText);
+							console.log("HTTP status code:" + response.status);
+						})
+			}
+		}
+		
+		$scope.election = function (schoolid)
+		{
+			document.getElementById("gotopage").setAttribute("action", "elections.php");
+			document.getElementById("schoolnamepost").value = schoolid;
+			document.getElementById("gotopage").submit();
+		}
+		
+		$scope.admin = function (schoolid)
+		{
+			document.getElementById("gotopage").setAttribute("action", "admin.php");
+			document.getElementById("schoolnamepost").value = schoolid;
+			document.getElementById("gotopage").submit();
 		}
 }]);
