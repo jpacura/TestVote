@@ -13,6 +13,10 @@ myApp.controller('schoolController', ['$scope', '$http', function ($scope, $http
 		.then(
 			function successCallback(response) {
 				console.log('server says:' + response.data);
+<<<<<<< HEAD
+=======
+				$scope.temp = response.data;
+>>>>>>> 98d7ff9ac219093a43b18061ec4bda1502232e34
 				
 				if(response.data.error)
 				{
@@ -44,10 +48,35 @@ myApp.controller('schoolController', ['$scope', '$http', function ($scope, $http
             .then(
                 function successCallback(response) {
                     console.log('server says:' + response.data);
+<<<<<<< HEAD
+=======
+                    $scope.temp = response.data;
+>>>>>>> 98d7ff9ac219093a43b18061ec4bda1502232e34
                     
                     if(response.data.error)
                     {
 						// THERE IS AN ERROR
+						
+						var errout = "ERROR: UNKNOWN SERVER ERROR!";
+						if(response.data.errorcode == 5)
+						{
+							// NOT LOGGED IN
+							errout = "ERROR: NOT LOGGED IN!";
+							window.location.href = "logout.php";
+						}
+						else if(response.data.errorcode == 4)
+						{
+							// SCHOOL ALREADY EXISTS
+							errout = "This School Already Exists!";
+						}
+						
+						$scope.errtext = errout;
+						$scope.isNotEnrolled = true;
+					}
+					else
+					{
+						// NO ERRORS
+					}
                 },
                 function errorCallback(response) {
                     console.log(response.statusText);

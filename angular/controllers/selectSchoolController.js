@@ -1,4 +1,3 @@
-
 myApp.controller('selectSchoolController', ['$scope', '$http', function ($scope, $http) {
         
 	var RegisterData = "{\"operation\" : \"LISTSCHOOLS\"}";

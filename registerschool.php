@@ -47,6 +47,8 @@
                     <input class="form-control" type=text ng-model="school.schoolUsername"
                            name="schoolUsername" placeholder="School Username" required/>
                 </div>
+=======
+>>>>>>> 98d7ff9ac219093a43b18061ec4bda1502232e34
                 <button type="button" value="Register Student"
                         ng-disabled="registrationForm.$invalid" ng-click="register(school)" >Register School</button>
             </form>

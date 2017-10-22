@@ -68,7 +68,7 @@
     margin-bottom: 1rem;
     border-radius: 0.25rem;
     background-color: #f2dede;
-    border-color: #ebcccc;
+    border: 1px solid #ebcccc;
     color: #a94442;
 }
 
