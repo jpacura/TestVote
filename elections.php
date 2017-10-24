@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/navibar.css">
 </head>
 <body ng-app="VoteSys">
+	<div ng-init='schoolid="<?php echo $_POST['school']; ?>"'></div>
 	<div class="navi">
 		<div class="title">
 			<img src="images/logoblack.svg">
@@ -20,13 +21,17 @@
 		<h2>Welcome, {{studentusername}}</h2>
 		<p class="ng-hide" id="tableerrortext" ng-show="isNoElections">{{errtext}}</p>
 		<table class="ng-hide" rules=all frame=border ng-show="isTableVisible">
-			<tr><th>School Name:</th><th>Go to School:</th><th>Remove School:</th></tr>
+			<tr><th>Election Name:</th><th>Vote!</th></tr>
 			<tr ng-repeat="x in tabledata">
 				<td>{{x.Name}}</td>
-				
+				<td><a href="" ng-click="vote(x.ElectionID)">Vote!</a></td>
 			</tr>
 		</table>
-		<p>{{temp}}</p>
+		
+		<!-- INVISIBLE FORM FOR POST DATA -->
+		<form method="post" id="gotopage" action="vote.php">
+			<input type="hidden" id="electionidpost" name="electionid">
+		</form>
 	</div>
 	
 </body>
