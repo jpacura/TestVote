@@ -26,17 +26,19 @@
 		{
 			// THERE IS A VALID USER LOGGED IN
 			// CHECK TO SEE IF THEY ARE ENROLLED IN THE SCHOOL
-			if(isUserEnrolled())
+			if(isUserEnrolled($post_schoolusername))
 			{
 				// USER IS ENROLLED IN SCHOOL
 				$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 		
 				// GET USERS ID FROM MYSQL
-				$getuserid = "SELECT UserID FROM users WHERE Email = :uname";
+				$getuserid = "SELECT UserID,Name FROM users WHERE Email = :uname";
 				$query = $conn->prepare($getuserid);
 				$query->bindParam(':uname', $post_username);
 				$query->execute();
-				$mysql_userid = $query->fetchColumn();
+				$results = $query->fetch(PDO::FETCH_ASSOC);
+				$mysql_userid = $results['UserID'];
+				$mysql_username = $results['Name'];
 				
 				// GET SCHOOLS ID FROM MYSQL
 				$getschoolid = "SELECT SchoolID FROM schools WHERE Username = :name";
@@ -65,7 +67,7 @@
 					if($numrows == 0)
 					{
 						// NO ELECTIONS
-						echo "{ \"error\" : true , \"errorcode\" : 10 , \"response\" : \"noelections\" }";
+						echo "{ \"error\" : true , \"errorcode\" : 10, \"name\" : \"$mysql_username\" , \"response\" : \"noelections\" }";
 					}
 					else
 					{
@@ -86,7 +88,7 @@
 					if($numrows == 0)
 					{
 						// NO ELECTIONS
-						echo "{ \"error\" : true , \"errorcode\" : 10 , \"response\" : \"noelections\" }";
+						echo "{ \"error\" : true , \"errorcode\" : 10, \"name\" : \"$mysql_username\" , \"response\" : \"noelections\" }";
 					}
 					else
 					{
@@ -183,11 +185,11 @@
 		}
 	}
 	
-	function isUserEnrolled()
+	function isUserEnrolled($schoolusername)
 	{
 		global $servername, $database, $username, $password;
 		
-		$post_schoolusername = $data->schoolUsername;
+		$post_schoolusername = $schoolusername;
 		$post_username = $_SESSION["username"];
 		
 		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
@@ -207,14 +209,14 @@
 		$mysql_schoolid = $query->fetchColumn();
 		
 		// MAKE SURE USER IS ENROLLED
-		$checkenrollment = "Select SchoolID FROM enrollment WHERE UserID = :uid AND SchoolID = :sid";
+		$checkenrollment = "SELECT SchoolID FROM enrollment WHERE UserID = :uid AND SchoolID = :sid";
 		$query = $conn->prepare($checkenrollment);
 		$query->bindParam(':uid', $mysql_userid);
 		$query->bindParam(':sid', $mysql_schoolid);
 		$query->execute();
 		$numrows = $query->rowCount();
 		
-		if($numrows != 0)
+		if($numrows > 0)
 		{
 			// USER IS ENROLLED
 			return 1;
