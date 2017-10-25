@@ -1,7 +1,7 @@
 
 myApp.controller('selectElectionController', ['$scope', '$http', function ($scope, $http) {
         
-	var RegisterData = "{\"operation\" : \"LISTELECTIONS\" , \"schoolusername\" : " + $scope.schoolid + " }";
+	var RegisterData = "{\"operation\" : \"LISTELECTIONS\" , \"schoolusername\" : \"" + $scope.schoolid + "\" }";
 
 	console.log("JSON sent to server:" + RegisterData);
 	
@@ -15,8 +15,6 @@ myApp.controller('selectElectionController', ['$scope', '$http', function ($scop
 		.then(
 			function successCallback(response) {
 				console.log('server says:' + response.data);
-				
-				$scope.temp = response.data
 				
 				if(response.data.error)
 				{
@@ -33,11 +31,13 @@ myApp.controller('selectElectionController', ['$scope', '$http', function ($scop
 					{
 						// NOT ENROLLED IN SCHOOL
 						errout = "ERROR: NOT ENROLLED IN SELECTED SCHOOL!";
-						window.location.href = "logout.php";
+						window.location.href = "schools.php";
 					}
 					else if(response.data.errorcode == 10)
 					{
 						// NO ELECTIONS
+						$scope.studentusername = response.data.name;
+						$scope.schoolname = response.data.schoolname;
 						errout = "The school currently has no elections!";
 						$scope.errtext = errout;
 						$scope.isTableVisible = false;
@@ -50,6 +50,7 @@ myApp.controller('selectElectionController', ['$scope', '$http', function ($scop
 				{
 					// NO ERRORS
 					$scope.studentusername = response.data.name;
+					$scope.schoolname = response.data.schoolname;
 					$scope.isNoElections = false;
 					$scope.isTableVisible = true;
 				}
@@ -61,5 +62,9 @@ myApp.controller('selectElectionController', ['$scope', '$http', function ($scop
 				console.log("HTTP status code:" + response.status);
 			})
 			
-			
+			$scope.vote = function (electionid)
+			{
+				document.getElementById("electionidpost").value = electionid;
+				document.getElementById("gotopage").submit();
+			}
 }]);
