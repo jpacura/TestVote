@@ -41,11 +41,13 @@
 				$mysql_username = $results['Name'];
 				
 				// GET SCHOOLS ID FROM MYSQL
-				$getschoolid = "SELECT SchoolID FROM schools WHERE Username = :name";
+				$getschoolid = "SELECT SchoolID,Name FROM schools WHERE Username = :name";
 				$query = $conn->prepare($getschoolid);
 				$query->bindParam(':name', $post_schoolusername);
 				$query->execute();
-				$mysql_schoolid = $query->fetchColumn();
+				$results = $query->fetch(PDO::FETCH_ASSOC);
+				$mysql_schoolid = $results['SchoolID'];
+				$mysql_schoolname = $results['Name'];
 				
 				// CHECK IF REQUESTING USER IS ADMINISTRATOR
 				$getadmin = "SELECT Administrator FROM enrollment WHERE UserID = :uid AND SchoolID = :sid";
@@ -67,13 +69,13 @@
 					if($numrows == 0)
 					{
 						// NO ELECTIONS
-						echo "{ \"error\" : true , \"errorcode\" : 10, \"name\" : \"$mysql_username\" , \"response\" : \"noelections\" }";
+						echo "{ \"error\" : true , \"errorcode\" : 10, \"name\" : \"$mysql_username\", \"schoolname\" : \"$mysql_schoolname\" , \"response\" : \"noelections\" }";
 					}
 					else
 					{
 						$tabledata = $query->fetchAll(PDO::FETCH_ASSOC);
 						$tabledata = json_encode($tabledata);
-						echo "{ \"error\" : false , \"name\" : \"$mysql_username\" , \"elections\" : $tabledata }";
+						echo "{ \"error\" : false , \"name\" : \"$mysql_username\", \"schoolname\" : \"$mysql_schoolname\" , \"elections\" : $tabledata }";
 					}
 				}
 				else
@@ -88,13 +90,13 @@
 					if($numrows == 0)
 					{
 						// NO ELECTIONS
-						echo "{ \"error\" : true , \"errorcode\" : 10, \"name\" : \"$mysql_username\" , \"response\" : \"noelections\" }";
+						echo "{ \"error\" : true , \"errorcode\" : 10, \"name\" : \"$mysql_username\", \"schoolname\" : \"$mysql_schoolname\" , \"response\" : \"noelections\" }";
 					}
 					else
 					{
 						$tabledata = $query->fetchAll(PDO::FETCH_ASSOC);
 						$tabledata = json_encode($tabledata);
-						echo "{ \"error\" : false , \"name\" : \"$mysql_username\" , \"elections\" : $tabledata }";
+						echo "{ \"error\" : false , \"name\" : \"$mysql_username\", \"schoolname\" : \"$mysql_schoolname\" , \"elections\" : $tabledata }";
 					}
 				}
 			}

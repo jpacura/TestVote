@@ -19,6 +19,7 @@
 	
 	<div ng-controller="selectElectionController">
 		<h2>Welcome, {{studentusername}}</h2>
+		<h3>Elections for {{schoolname}}:</h3>
 		<p class="ng-hide" id="tableerrortext" ng-show="isNoElections">{{errtext}}</p>
 		<table class="ng-hide" rules=all frame=border ng-show="isTableVisible">
 			<tr><th>Election Name:</th><th>Vote!</th></tr>

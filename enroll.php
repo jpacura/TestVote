@@ -20,6 +20,7 @@
         <p>Student Registration</p>
     </div>
     <div class="registration">
+		<p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
         <div class="panel-body">
             <form novalidate class="input-field" name="registrationForm" method=post>
                 <div class="form-group">
@@ -36,7 +37,6 @@
             </form>
         </div>
     </div>
-    <p>{{temp}}</p> <!--test display here-->
 </div>
 </body>
 <script src="angular/controllers/myApp.js"></script>

@@ -37,6 +37,7 @@ myApp.controller('selectElectionController', ['$scope', '$http', function ($scop
 					{
 						// NO ELECTIONS
 						$scope.studentusername = response.data.name;
+						$scope.schoolname = response.data.schoolname;
 						errout = "The school currently has no elections!";
 						$scope.errtext = errout;
 						$scope.isTableVisible = false;
@@ -49,6 +50,7 @@ myApp.controller('selectElectionController', ['$scope', '$http', function ($scop
 				{
 					// NO ERRORS
 					$scope.studentusername = response.data.name;
+					$scope.schoolname = response.data.schoolname;
 					$scope.isNoElections = false;
 					$scope.isTableVisible = true;
 				}

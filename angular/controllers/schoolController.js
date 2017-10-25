@@ -68,6 +68,7 @@ myApp.controller('schoolController', ['$scope', '$http', function ($scope, $http
 					else
 					{
 						// NO ERRORS
+						window.location.href = "schools.php";
 					}
                 },
                 function errorCallback(response) {

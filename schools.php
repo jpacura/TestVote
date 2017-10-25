@@ -32,6 +32,7 @@
 		</table>
 		<br>
 		<button onclick="window.location.href='./enroll.php'">Enroll in a School</button>
+		<button onclick="window.location.href='./registerschool.php'">Register a New School</button>
 		
 		<!-- INVISIBLE FORM FOR POST DATA -->
 		<form method="post" id="gotopage" action="">
