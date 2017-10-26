@@ -25,13 +25,14 @@
 			<tr><th>Election Name:</th><th>Vote!</th></tr>
 			<tr ng-repeat="x in tabledata">
 				<td>{{x.Name}}</td>
-				<td><a href="" ng-click="vote(x.ElectionID)">Vote!</a></td>
+				<td><a href="" ng-click="vote(x.ElectionID, schoolid)">Vote!</a></td>
 			</tr>
 		</table>
 		
 		<!-- INVISIBLE FORM FOR POST DATA -->
 		<form method="post" id="gotopage" action="vote.php">
 			<input type="hidden" id="electionidpost" name="electionid">
+			<input type="hidden" id="schoolidpost" name="schoolid">
 		</form>
 	</div>
 	
