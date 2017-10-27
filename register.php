@@ -28,6 +28,7 @@
     <div class="registration">
         <div class="panel-body">
             <form novalidate class="input-field" name="registrationForm" method=post>
+                <p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
                 <div class="form-group">
                     <div class="alert"
                          ng-show="registrationForm.fname.$touched &&
@@ -89,7 +90,6 @@
             </form>
         </div>
     </div>
-    <p>{{temp}}</p> <!--test display here-->
 </div>
 </body>
 <script src="angular/controllers/myApp.js"></script>
