@@ -22,8 +22,9 @@
 		<h2>Welcome, {{studentusername}}</h2>
 		<h3>{{electionname}} for {{schoolname}}:</h3>
 		
+		<p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
 		<div class="ng-hide" ng-show="isElectionVisible">
-			<form action="vote.php" method="GET">
+			<form action="TEMP/recordvote.php" method="POST">
 				<div ng-repeat="(qid,q) in questions">
 					<div style="border:1px solid" >
 						<div ng-repeat="(k, v) in q">
@@ -44,10 +45,10 @@
 				</div>
 				<br>
 				<input type="submit" value="Vote!">
+				<input type="hidden" id="schoolidpost" name="schoolid">
+				<input type="hidden" id="electionidpost" name="electionid">
 			</form>
 		</div>
-		
-		<p>{{temp}}</p>
 	</div>
 	
 </body>
