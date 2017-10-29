@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navibar.css">
+    <script src="angular/dependence/angular.min.js"></script>
 </head>
 <body ng-app="VoteSys">
 <div class="navi">

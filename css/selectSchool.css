@@ -43,7 +43,7 @@
 }
 
 .table tbody tr:hover {
-    background: #547BBC;
+    background: rgba(84, 123, 188, 0.36);
     color: white;
 }
 

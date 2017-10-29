@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>TestVote - Select Election</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navibar.css">
+    <script src="angular/dependence/angular.min.js"></script>
 </head>
 <body ng-app="VoteSys">
 	<div ng-init='schoolid="<?php echo $_POST['school']; ?>"'></div>
@@ -13,13 +13,14 @@
 		<div class="title">
 			<img src="images/logoblack.svg">
 			<h3 style="padding-top: 7px">Select Election</h3>
-			<h2><a href="logout.php">Log Out</a></h2>
 		</div>
+        <a href="logout.php">Log Out</a>
 	</div>
 	
 	<div ng-controller="selectElectionController">
 		<h2>Welcome, {{studentusername}}</h2>
 		<h3>Elections for {{schoolname}}:</h3>
+
 		<p class="ng-hide" id="tableerrortext" ng-show="isNoElections">{{errtext}}</p>
 		<table class="ng-hide" rules=all frame=border ng-show="isTableVisible">
 			<tr><th>Election Name:</th><th>Vote!</th></tr>
