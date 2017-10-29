@@ -1,1 +1,1 @@
-var myApp = angular.module('VoteSys', []);
+var myApp = angular.module('VoteSys', ['ngMaterial']);

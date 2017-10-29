@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="css/navibar.css">
     <link rel="stylesheet" href="css/registerstudent.css">
     <script src="angular/dependence/angular.min.js"></script>
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <script src="angular/dependence/angular.min.js"></script>
+    <script src="angular/dependence/fontawsome.js"></script>
+    <script src="angular/dependence/angular-animate.min.js"></script>
+    <script src="angular/dependence/angular-aria.min.js"></script>
+    <script src="angular/dependence/angular-messages.min.js"></script>
+    <script src="angular/dependence/angular-material.min.js"></script>
 </head>
 <body ng-app="VoteSys">
 <div class="navi">
@@ -17,7 +24,7 @@
 </div>
 <div class="mainArea" ng-controller="enrollController">
     <div class="user-line">
-        <p>Student Registration</p>
+        <h3><i class="fa fa-graduation-cap" aria-hidden="true"><b> Student Enroll</b></i></h3>
     </div>
     <div class="registration">
         <p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
@@ -33,7 +40,8 @@
                            name="username" placeholder="School Username" required/>
                 </div>
                 <button type="button" value="Enroll"
-                        ng-disabled="registrationForm.$invalid" ng-click="enroll()">Register Student
+                        ng-disabled="registrationForm.$invalid" ng-click="enroll()">
+                    <i class="fa fa-graduation-cap" aria-hidden="true"><b> Register Student</b></i>
                 </button>
             </form>
         </div>

@@ -34,8 +34,8 @@
 .login .panel-body button {
     width: 80%;
     margin: 1em auto;
-    padding: 1em;
-    font-size: 0.8em;
+    padding: 0.8em;
+    font-size: 1em;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;

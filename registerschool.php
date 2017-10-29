@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="css/navibar.css">
     <link rel="stylesheet" href="css/registerstudent.css">
     <script src="angular/dependence/angular.min.js"></script>
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <script src="angular/dependence/angular.min.js"></script>
+    <script src="angular/dependence/fontawsome.js"></script>
+    <script src="angular/dependence/angular-animate.min.js"></script>
+    <script src="angular/dependence/angular-aria.min.js"></script>
+    <script src="angular/dependence/angular-messages.min.js"></script>
+    <script src="angular/dependence/angular-material.min.js"></script>
 </head>
 
 <body ng-app="VoteSys">
@@ -18,7 +25,7 @@
 </div>
 <div class="mainArea" ng-controller="schoolController">
     <div class="user-line">
-        <p>School Registration</p>
+        <h3><i class="fa fa-university" aria-hidden="true"><b> School Registration</b></i></h3>
     </div>
     <p class="user-note">
         When you register a new school, you will be added as the first administrator user. This user can add other
@@ -49,7 +56,8 @@
                            name="schoolUsername" placeholder="School Username" required/>
                 </div>
                 <button type="button" value="Register Student"
-                        ng-disabled="registrationForm.$invalid" ng-click="register(school)">Register School
+                        ng-disabled="registrationForm.$invalid" ng-click="register(school)">
+                    <i class="fa fa-university" aria-hidden="true"><b> Register School</b></i>
                 </button>
             </form>
         </div>

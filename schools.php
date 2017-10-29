@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="css/navibar.css">
     <link rel="stylesheet" href="css/selectSchool.css">
     <script src="angular/dependence/angular.min.js"></script>
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <script src="angular/dependence/angular.min.js"></script>
+    <script src="angular/dependence/fontawsome.js"></script>
+    <script src="angular/dependence/angular-animate.min.js"></script>
+    <script src="angular/dependence/angular-aria.min.js"></script>
+    <script src="angular/dependence/angular-messages.min.js"></script>
+    <script src="angular/dependence/angular-material.min.js"></script>
+</head>
 </head>
 <body ng-app="VoteSys">
 <div class="navi">
@@ -19,7 +27,7 @@
 
 <div class="mainArea" ng-controller="selectSchoolController">
     <div class="user-line">
-        <p>Welcome, {{studentusername}}</p>
+        <h3><i class="fa fa-smile-o" aria-hidden="true"><b> Welcome, {{studentusername}}</b></i></h3>
     </div>
 
     <div class="message">
@@ -54,8 +62,10 @@
         </table>
     </div>
     <div class="user-line">
-        <button onclick="window.location.href='./enroll.php'">Enroll in a School</button>
-        <button onclick="window.location.href='./registerschool.php'">Register a New School</button>
+        <button onclick="window.location.href='./enroll.php'">
+            <i class="fa fa-user-plus" aria-hidden="true"><b> Enroll in a School</b></i></button>
+        <button onclick="window.location.href='./registerschool.php'">
+            <i class="fa fa-university" aria-hidden="true"><b> Register a New School</b></i></button>
 
     </div>
 
