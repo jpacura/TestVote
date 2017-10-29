@@ -5,7 +5,7 @@
     <title>TestVote - Select Election</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navibar.css">
-    <link rel="stylesheet" href="css/selectSchool.css">
+    <link rel="stylesheet" href="css/elections.css">
     <script src="angular/dependence/angular.min.js"></script>
 </head>
 <body ng-app="VoteSys">
