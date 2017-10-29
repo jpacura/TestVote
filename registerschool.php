@@ -21,13 +21,14 @@
         <p>School Registration</p>
     </div>
     <p class="user-note">
-        When you register a new school, you will be added as the first administrator user. This user can add other administrators, as well as add other administrators.
+        When you register a new school, you will be added as the first administrator user. This user can add other
+        administrators, as well as add other administrators.
     </p>
     <div class="registration">
         <div class="panel-body">
-			
-			<p class="ng-hide" id="tableerrortext" ng-show="isNotEnrolled">{{errtext}}</p>
-			
+
+            <p class="ng-hide" id="tableerrortext" ng-show="isNotEnrolled">{{errtext}}</p>
+
             <form novalidate class="input-field" name="registrationForm" method=post>
                 <div class="form-group">
                     <div class="alert"
@@ -48,7 +49,8 @@
                            name="schoolUsername" placeholder="School Username" required/>
                 </div>
                 <button type="button" value="Register Student"
-                        ng-disabled="registrationForm.$invalid" ng-click="register(school)" >Register School</button>
+                        ng-disabled="registrationForm.$invalid" ng-click="register(school)">Register School
+                </button>
             </form>
         </div>
     </div>

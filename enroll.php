@@ -20,7 +20,7 @@
         <p>Student Registration</p>
     </div>
     <div class="registration">
-		<p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
+        <p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
         <div class="panel-body">
             <form novalidate class="input-field" name="registrationForm" method=post>
                 <div class="form-group">
@@ -33,7 +33,8 @@
                            name="username" placeholder="School Username" required/>
                 </div>
                 <button type="button" value="Enroll"
-                        ng-disabled="registrationForm.$invalid" ng-click="enroll()">Register Student</button>
+                        ng-disabled="registrationForm.$invalid" ng-click="enroll()">Register Student
+                </button>
             </form>
         </div>
     </div>

@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61fe0388-d721-4fb6-bf8d-5a2c0f82fd73" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/angular/dependence/angular.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/selectSchool.css" afterPath="$PROJECT_DIR$/css/selectSchool.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/elections.php" afterPath="$PROJECT_DIR$/elections.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enroll.php" afterPath="$PROJECT_DIR$/enroll.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login.php" afterPath="$PROJECT_DIR$/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/register.php" afterPath="$PROJECT_DIR$/register.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/registerschool.php" afterPath="$PROJECT_DIR$/registerschool.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schools.php" afterPath="$PROJECT_DIR$/schools.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,24 +15,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="selectSchool.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/selectSchool.css">
+      <file leaf-file-name="elections.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/elections.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-87">
-              <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+            <state relative-caret-position="630">
+              <caret line="42" column="21" lean-forward="true" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="elections.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/elections.php">
+      <file leaf-file-name="enroll.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enroll.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-              <folding>
-                <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="570">
+              <caret line="38" column="14" lean-forward="true" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="registerschool.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/registerschool.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="479">
+              <caret line="52" column="25" lean-forward="true" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,13 +98,13 @@
         <option value="$PROJECT_DIR$/angular/controllers/selectSchoolController.js" />
         <option value="$PROJECT_DIR$/css/login.css" />
         <option value="$PROJECT_DIR$/angular/controllers/enrollController.js" />
-        <option value="$PROJECT_DIR$/registerschool.php" />
         <option value="$PROJECT_DIR$/register.php" />
         <option value="$PROJECT_DIR$/login.php" />
-        <option value="$PROJECT_DIR$/enroll.php" />
         <option value="$PROJECT_DIR$/css/selectSchool.css" />
-        <option value="$PROJECT_DIR$/elections.php" />
         <option value="$PROJECT_DIR$/schools.php" />
+        <option value="$PROJECT_DIR$/elections.php" />
+        <option value="$PROJECT_DIR$/enroll.php" />
+        <option value="$PROJECT_DIR$/registerschool.php" />
       </list>
     </option>
   </component>
@@ -114,9 +116,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="138" />
+    <option name="x" value="51" />
     <option name="y" value="24" />
-    <option name="width" value="1273" />
+    <option name="width" value="1032" />
     <option name="height" value="808" />
   </component>
   <component name="ProjectView">
@@ -152,6 +154,11 @@
               <item name="TestVote" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="angular" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="TestVote" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestVote" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -228,18 +235,18 @@
       <workItem from="1508961863594" duration="95000" />
       <workItem from="1509072221949" duration="467000" />
       <workItem from="1509159055049" duration="980000" />
-      <workItem from="1509217417518" duration="4878000" />
+      <workItem from="1509217417518" duration="5931000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77443000" />
+    <option name="totallyTimeSpent" value="78496000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="138" y="24" width="1273" height="808" extended-state="0" />
+    <frame x="51" y="24" width="1032" height="808" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22152396" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27325583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
@@ -495,14 +502,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enroll.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -591,35 +590,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/selectSchool.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-87">
-          <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registerschool.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="21" column="10" lean-forward="true" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/schools.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="51" column="17" lean-forward="true" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+        <state relative-caret-position="150">
+          <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/elections.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-          <folding>
-            <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="630">
+          <caret line="42" column="21" lean-forward="true" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enroll.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="14" lean-forward="true" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerschool.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="52" column="25" lean-forward="true" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
