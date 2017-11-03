@@ -60,6 +60,17 @@ myApp.controller('voteController', ['$scope', '$http', function ($scope, $http) 
 						$scope.isElectionVisible = false;
 						$scope.isError = true;
 					}
+					else if(response.data.errorcode == 13)
+					{
+						// USER ALREADY VOTED
+						$scope.studentusername = response.data.name;
+						$scope.schoolname = response.data.schoolname;
+						$scope.electionname = response.data.electionname;
+						errout = "You have already voted in this election!";
+						$scope.errtext = errout;
+						$scope.isElectionVisible = false;
+						$scope.isError = true;
+					}
 					
 					
 				}

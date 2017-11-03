@@ -23,11 +23,13 @@
 		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 		
 		// GET USERS NAME FROM MYSQL
-		$getuserid = "SELECT Name FROM users WHERE Email = :uname";
+		$getuserid = "SELECT Name,UserID FROM users WHERE Email = :uname";
 		$query = $conn->prepare($getuserid);
 		$query->bindParam(':uname', $post_username);
 		$query->execute();
-		$mysql_username = $query->fetchColumn();
+		$results = $query->fetch(PDO::FETCH_ASSOC);
+		$mysql_userid = $results['UserID'];
+		$mysql_username = $results['Name'];
 		
 		// GET SCHOOLS NAME FROM MYSQL
 		$getschoolid = "SELECT Name FROM schools WHERE Username = :name";
@@ -46,77 +48,94 @@
 				{
 					// ELECTION IS OWNED BY SCHOOL AND ENABLED
 					
-					// GET ELECTION NAME
-					$getelectionname = "SELECT Name FROM elections WHERE ElectionID = :eid";
-					$query = $conn->prepare($getelectionname);
-					$query->bindParam(':eid', $post_electionid);
-					$query->execute();
-					$mysql_electionname = $query->fetchColumn();
-					
-					// GET ALL QUESTIONS IN THIS ELECTION
-					$getelectionquestions = "SELECT Name,QuestionID FROM question WHERE ElectionID = :eid ORDER BY QuestionOrder";
-					$query = $conn->prepare($getelectionquestions);
+					$checkifvoted = "SELECT VoteID FROM userVote WHERE UserID = :uid AND ElectionID = :eid";
+					$query = $conn->prepare($checkifvoted);
+					$query->bindParam(':uid', $mysql_userid);
 					$query->bindParam(':eid', $post_electionid);
 					$query->execute();
 					$rowcount = $query->rowCount();
 					
 					if($rowcount == 0)
-					{
-						// THERE ARE NO QUESTIONS IN THIS ELECTION
-						echo "{ \"error\" : true , \"errorcode\" : 12 , \"response\" : \"noquestions\" }";
-					}
-					else
-					{
-						$mysql_questions = $query->fetchAll(PDO::FETCH_ASSOC);
+					{	
+						// USER HAS NOT ALREADY VOTED
 						
-						$outputtext = "{ \"error\" : false, \"username\" : \"$mysql_username\", \"schoolname\" : \"$mysql_schoolname\", \"electionname\" : \"$mysql_electionname\" , \"questions\" : { ";
-						$validquestioncount = 0; // MAKE SURE THIS IS CHANGED TO 0 LATER
+						// GET ELECTION NAME
+						$getelectionname = "SELECT Name FROM elections WHERE ElectionID = :eid";
+						$query = $conn->prepare($getelectionname);
+						$query->bindParam(':eid', $post_electionid);
+						$query->execute();
+						$mysql_electionname = $query->fetchColumn();
 						
-						$questionarray = "";
-						foreach($mysql_questions as $q)
+						// GET ALL QUESTIONS IN THIS ELECTION
+						$getelectionquestions = "SELECT Name,QuestionID FROM question WHERE ElectionID = :eid ORDER BY QuestionOrder";
+						$query = $conn->prepare($getelectionquestions);
+						$query->bindParam(':eid', $post_electionid);
+						$query->execute();
+						$rowcount = $query->rowCount();
+						
+						if($rowcount == 0)
 						{
-							// GET ALL CHOICES FOR QUESTION
-							$q_id = $q['QuestionID'];
-							$getchoices = "SELECT OptionID,Value FROM questionOptions WHERE QuestionID = :qid ORDER BY OptionOrder";
-							$query = $conn->prepare($getchoices);
-							$query->bindParam(':qid', $q_id);
-							$query->execute();
-							$rowcount = $query->rowCount();
-							
-							if($rowcount == 0)
-							{
-								continue;
-							}
-							$validquestioncount = $validquestioncount + 1;
-							
-							$q_name = $q['Name'];
-							$questionarray = "$questionarray\"$q_id\" : [ {\"$q_id\" : \"$q_name\"},";
-							
-							$mysql_answers = $query->fetchAll(PDO::FETCH_ASSOC);
-							
-							foreach($mysql_answers as $a)
-							{
-								$a_id = $a['OptionID'];
-								$a_value = $a['Value'];
-								$questionarray = "$questionarray{\"$a_id\" : \"$a_value\"},";
-							}
-							$questionarray = rtrim($questionarray, ',');
-							
-							$questionarray = "$questionarray ] ,";
-						}
-						$questionarray = rtrim($questionarray, ',');
-						
-						
-						if($validquestioncount > 0)
-						{
-							$outputtext = "$outputtext$questionarray } }";
-							echo $outputtext;
+							// THERE ARE NO QUESTIONS IN THIS ELECTION
+							echo "{ \"error\" : true , \"errorcode\" : 12 , \"response\" : \"noquestions\" }";
 						}
 						else
 						{
-							// NO VALID QUESTIONS
-							echo "{ \"error\" : true , \"errorcode\" : 12 , \"response\" : \"noquestions\" }";
+							$mysql_questions = $query->fetchAll(PDO::FETCH_ASSOC);
+							
+							$outputtext = "{ \"error\" : false, \"username\" : \"$mysql_username\", \"schoolname\" : \"$mysql_schoolname\", \"electionname\" : \"$mysql_electionname\" , \"questions\" : { ";
+							$validquestioncount = 0;
+							
+							$questionarray = "";
+							foreach($mysql_questions as $q)
+							{
+								// GET ALL CHOICES FOR QUESTION
+								$q_id = $q['QuestionID'];
+								$getchoices = "SELECT OptionID,Value FROM questionOptions WHERE QuestionID = :qid ORDER BY OptionOrder";
+								$query = $conn->prepare($getchoices);
+								$query->bindParam(':qid', $q_id);
+								$query->execute();
+								$rowcount = $query->rowCount();
+								
+								if($rowcount == 0)
+								{
+									continue;
+								}
+								$validquestioncount = $validquestioncount + 1;
+								
+								$q_name = $q['Name'];
+								$questionarray = "$questionarray\"$q_id\" : [ {\"$q_id\" : \"$q_name\"},";
+								
+								$mysql_answers = $query->fetchAll(PDO::FETCH_ASSOC);
+								
+								foreach($mysql_answers as $a)
+								{
+									$a_id = $a['OptionID'];
+									$a_value = $a['Value'];
+									$questionarray = "$questionarray{\"$a_id\" : \"$a_value\"},";
+								}
+								$questionarray = rtrim($questionarray, ',');
+								
+								$questionarray = "$questionarray ] ,";
+							}
+							$questionarray = rtrim($questionarray, ',');
+							
+							
+							if($validquestioncount > 0)
+							{
+								$outputtext = "$outputtext$questionarray } }";
+								echo $outputtext;
+							}
+							else
+							{
+								// NO VALID QUESTIONS
+								echo "{ \"error\" : true , \"errorcode\" : 12 , \"response\" : \"noquestions\" }";
+							}
 						}
+					}
+					else
+					{
+						// USER ALREADY VOTED
+						echo "{ \"error\" : true , \"errorcode\" : 13 , \"response\" : \"alreadyvoted\" }";
 					}
 				}
 				else
