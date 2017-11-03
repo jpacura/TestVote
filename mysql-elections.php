@@ -81,9 +81,11 @@
 				else
 				{
 					// NOT AN ADMINISTRATOR. ONLY RETURN ENABLED ELECTIONS
-					$getelections = "SELECT ElectionID, Name FROM elections WHERE SchoolID = :sid AND Enabled = 1";
+					// ELECTIONS MUST NOT HAVE ALREADY BEEN VOTED ON, AND MUST CONTAIN AT LEAST ONE QUESTION
+					$getelections = "SELECT ElectionID, Name FROM elections WHERE SchoolID = :sid AND Enabled = 1 AND NOT EXISTS (SELECT UserID FROM userVote WHERE UserID = :uid AND userVote.ElectionID = elections.ElectionID) AND EXISTS (SELECT QuestionID FROM question WHERE question.ElectionID = elections.ElectionID)";
 					$query = $conn->prepare($getelections);
 					$query->bindParam(':sid', $mysql_schoolid);
+					$query->bindParam(':uid', $mysql_userid);
 					$query->execute();
 					$numrows = $query->rowCount();
 					

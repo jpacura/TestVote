@@ -16,7 +16,29 @@ myApp.controller('studentController', ['$scope', '$http', function ($scope, $htt
             .then(
                 function successCallback(response) {
                     console.log('server says:' + response.data);
-                    $scope.temp = response.data;
+                    
+                    if(response.data.error)
+					{
+						// THERE IS AN ERROR
+						var errout = "ERROR: UNKNOWN SERVER ERROR!";
+						if(response.data.errorcode == 2)
+						{
+							// USER ALREADY EXISTS
+							errout = "User already exists!";
+						}
+						else if(response.data.errorcode == 3)
+						{
+							// PASSWORDS DO NOT MATCH
+							errout = "Passwords do not match!";
+						}
+						$scope.errtext = errout;
+						$scope.isError = true;
+					}
+					else
+					{
+						// NO ERROR
+						window.location.href = "login.php";
+					}
                 },
                 function errorCallback(response) {
                     console.log(response.statusText);

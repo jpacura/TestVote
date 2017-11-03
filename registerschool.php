@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <title>Register a School - TestVote</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navibar.css">
     <link rel="stylesheet" href="css/registerstudent.css">
+    <script src="angular/dependence/angular.min.js"></script>
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <script src="angular/dependence/angular.min.js"></script>
+    <script src="angular/dependence/fontawsome.js"></script>
+    <script src="angular/dependence/angular-animate.min.js"></script>
+    <script src="angular/dependence/angular-aria.min.js"></script>
+    <script src="angular/dependence/angular-messages.min.js"></script>
+    <script src="angular/dependence/angular-material.min.js"></script>
 </head>
 
 <body ng-app="VoteSys">
@@ -18,16 +25,17 @@
 </div>
 <div class="mainArea" ng-controller="schoolController">
     <div class="user-line">
-        <p>School Registration</p>
+        <h3><i class="fa fa-university" aria-hidden="true"><b> School Registration</b></i></h3>
     </div>
     <p class="user-note">
-        When you register a new school, you will be added as the first administrator user. This user can add other administrators, as well as add other administrators.
+        When you register a new school, you will be added as the first administrator user. This user can add other
+        administrators, as well as add other administrators.
     </p>
     <div class="registration">
         <div class="panel-body">
-			
-			<p class="ng-hide" id="tableerrortext" ng-show="isNotEnrolled">{{errtext}}</p>
-			
+
+            <p class="ng-hide" id="tableerrortext" ng-show="isNotEnrolled">{{errtext}}</p>
+
             <form novalidate class="input-field" name="registrationForm" method=post>
                 <div class="form-group">
                     <div class="alert"
@@ -48,7 +56,9 @@
                            name="schoolUsername" placeholder="School Username" required/>
                 </div>
                 <button type="button" value="Register Student"
-                        ng-disabled="registrationForm.$invalid" ng-click="register(school)" >Register School</button>
+                        ng-disabled="registrationForm.$invalid" ng-click="register(school)">
+                    <i class="fa fa-university" aria-hidden="true"><b> Register School</b></i>
+                </button>
             </form>
         </div>
     </div>

@@ -62,9 +62,10 @@ myApp.controller('selectElectionController', ['$scope', '$http', function ($scop
 				console.log("HTTP status code:" + response.status);
 			})
 			
-			$scope.vote = function (electionid)
+			$scope.vote = function (electionid, schoolid)
 			{
 				document.getElementById("electionidpost").value = electionid;
+				document.getElementById("schoolidpost").value = schoolid;
 				document.getElementById("gotopage").submit();
 			}
 }]);

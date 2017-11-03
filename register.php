@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Student Registration - TestVote</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navibar.css">
     <link rel="stylesheet" href="css/registerstudent.css">
+    <script src="angular/dependence/angular.min.js"></script>
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <script src="angular/dependence/angular.min.js"></script>
+    <script src="angular/dependence/fontawsome.js"></script>
+    <script src="angular/dependence/angular-animate.min.js"></script>
+    <script src="angular/dependence/angular-aria.min.js"></script>
+    <script src="angular/dependence/angular-messages.min.js"></script>
+    <script src="angular/dependence/angular-material.min.js"></script>
 </head>
 <body ng-app="VoteSys">
 <div class="navi">
@@ -17,7 +24,7 @@
 </div>
 <div class="mainArea" ng-controller="studentController">
     <div class="user-line">
-        <p>Student Registration</p>
+        <h3><i class="fa fa-graduation-cap" aria-hidden="true"><b> Student Registration</b></i></h3>
     </div>
     <p class="user-note">
         A student can only register here after an administrator creates
@@ -28,6 +35,7 @@
     <div class="registration">
         <div class="panel-body">
             <form novalidate class="input-field" name="registrationForm" method=post>
+                <p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
                 <div class="form-group">
                     <div class="alert"
                          ng-show="registrationForm.fname.$touched &&
@@ -85,11 +93,11 @@
                            placeholder="Confirm Password..." required password-match="user.password"/>
                 </div>
                 <button type="button" value="Register Student"
-                        ng-disabled="registrationForm.$invalid" ng-click="register()">Register Student</button>
+                        ng-disabled="registrationForm.$invalid" ng-click="register()">
+                    <i class="fa fa-graduation-cap" aria-hidden="true"><b> Register Student</b></i></button>
             </form>
         </div>
     </div>
-    <p>{{temp}}</p> <!--test display here-->
 </div>
 </body>
 <script src="angular/controllers/myApp.js"></script>
