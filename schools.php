@@ -40,9 +40,8 @@
             <thead>
             <tr>
                 <th>School Name</th>
-                <th ng-if="x.Administrator == 0">Go to School</th>
-                <th ng-if="x.Administrator == 1">Remove School</th>
-                <th>Option</th>
+                <th>Go to School</th>
+                <th>Remove School</th>
             </tr>
             </thead>
             <tbody>

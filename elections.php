@@ -39,7 +39,7 @@
             <thead>
             <tr>
                 <th>Election Name</th>
-                <th></th>
+                <th>Vote!</th>
             </tr>
             </thead>
             <tbody>
