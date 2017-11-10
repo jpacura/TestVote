@@ -22,7 +22,7 @@
         <img src="../images/logoblack.svg">
         <h3 style="padding-top: 7px">School Administrators</h3>
     </div>
-    <a href="logout.php">Log Out</a>
+    <a href="../logout.php">Log Out</a>
 </div>
 
 <div class="mainArea" ng-controller="adminListAdministratorsController">
@@ -48,14 +48,19 @@
                 <td>{{x.Name}}</td>
                 <td>{{x.Email}}</td>
                 <td>
-                    <button ng-click="">Delete Administrator</button>
+                    <button ng-click="removeadmin(schoolid, x.Email, x.Name)">Delete Administrator</button>
                 </td>
             </tr>
             </tbody>
         </table>
-        <button onclick="window.location.href='../admin.php'">Return to Admin Panel</button>
+        <button ng-click="gotoadminpanel(schoolid)">Return to Admin Panel</button>
         <button>Create a New Administrator</button>
     </div>
+    
+    <!-- INVISIBLE FORM FOR POST DATA -->
+    <form method="post" id="refresh" action="administrators.php">
+        <input type="hidden" id="schoolidrefresh" name="school">
+    </form>
 
     <!-- INVISIBLE FORM FOR POST DATA -->
     <form method="post" id="gotopage" action="vote.php">

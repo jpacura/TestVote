@@ -59,24 +59,12 @@
 				
 				if($mysql_administrator == 1)
 				{
-					// USER IS ADMINISTRATOR. RETURN ALL ELECTIONS
-					$getelections = "SELECT ElectionID, Name, Enabled FROM elections WHERE SchoolID = :sid";
-					$query = $conn->prepare($getelections);
-					$query->bindParam(':sid', $mysql_schoolid);
-					$query->execute();
-					$numrows = $query->rowCount();
+					// USER IS ADMINISTRATOR. THIS SHOULD NEVER HAPPEN IN THIS SCRIPT
+					// THIS FUNCTIONALITY WAS REMOVED SO THAT ACCESS RIGHTS COULD BE SEPARATED
+					// IT WAS PLACED INTO THE MYSQL-ADMIN FILE INSTEAD
+					// RETURN AN ERROR
 					
-					if($numrows == 0)
-					{
-						// NO ELECTIONS
-						echo "{ \"error\" : true , \"errorcode\" : 10, \"name\" : \"$mysql_username\", \"schoolname\" : \"$mysql_schoolname\" , \"response\" : \"noelections\" }";
-					}
-					else
-					{
-						$tabledata = $query->fetchAll(PDO::FETCH_ASSOC);
-						$tabledata = json_encode($tabledata);
-						echo "{ \"error\" : false , \"name\" : \"$mysql_username\", \"schoolname\" : \"$mysql_schoolname\" , \"elections\" : $tabledata }";
-					}
+					echo "{ \"error\" : true , \"errorcode\" : 10, \"name\" : \"$mysql_username\", \"schoolname\" : \"$mysql_schoolname\" , \"response\" : \"noelections\" }";
 				}
 				else
 				{

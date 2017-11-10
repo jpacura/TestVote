@@ -21,6 +21,7 @@
 					echo "<br><br><br>";
 					echo '<p><a href="#" onclick="users()">Click Here</a> to go to admin/users.php</p>';
 					echo '<p><a href="#" onclick="admins()">Click Here</a> to go to admin/administrators.php</p>';
+					echo '<p><a href="#" onclick="elections()">Click Here</a> to go to admin/elections.php</p>';
 					
 					echo '<form method="post" id="go" action="">';
 					echo "	<input type=\"hidden\" id=\"schoolnamepost\" name=\"school\" value=\"$sname\">";
@@ -49,6 +50,12 @@
 			function admins()
 			{
 				document.getElementById("go").action = "admin/administrators.php";
+				document.getElementById("go").submit();
+			}
+			
+			function elections()
+			{
+				document.getElementById("go").action = "admin/elections.php";
 				document.getElementById("go").submit();
 			}
 		</script>
