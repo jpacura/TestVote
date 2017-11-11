@@ -260,6 +260,152 @@
 			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
 		}
 	}
+	else if ($operation == "TOGGLEELECTION")
+	{
+		// LIST ALL ELECTIONS THAT THE SELECTED SCHOOL HAS
+		
+		$post_schoolusername = $data->schoolusername;
+		$post_electionid = $data->electionid;
+		$post_username = $_SESSION["username"];
+		
+		// CHECK IF VALID USER IS LOGGED IN
+		if(isTokenValid())
+		{
+			// THERE IS A VALID USER LOGGED IN
+			// CHECK TO SEE IF THEY ARE ENROLLED IN THE SCHOOL
+			if(isUserAdmin($post_schoolusername))
+			{
+				// USER IS ENROLLED IN SCHOOL
+				$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+		
+				// GET USERS ID FROM MYSQL
+				$getuserid = "SELECT UserID,Name FROM users WHERE Email = :uname";
+				$query = $conn->prepare($getuserid);
+				$query->bindParam(':uname', $post_username);
+				$query->execute();
+				$results = $query->fetch(PDO::FETCH_ASSOC);
+				$mysql_userid = $results['UserID'];
+				$mysql_username = $results['Name'];
+				
+				// GET SCHOOLS ID FROM MYSQL
+				$getschoolid = "SELECT SchoolID,Name FROM schools WHERE Username = :name";
+				$query = $conn->prepare($getschoolid);
+				$query->bindParam(':name', $post_schoolusername);
+				$query->execute();
+				$results = $query->fetch(PDO::FETCH_ASSOC);
+				$mysql_schoolid = $results['SchoolID'];
+				$mysql_schoolname = $results['Name'];
+				
+				// CHECK IF ELECTION ACTUALLY BELONGS TO REQUESTING SCHOOL
+				$checkschool = "SELECT Enabled FROM elections WHERE ElectionID = :eid AND SchoolID = :sid";
+				$query = $conn->prepare($checkschool);
+				$query->bindParam(':eid', $post_electionid);
+				$query->bindParam(':sid', $mysql_schoolid);
+				$query->execute();
+				$numrows = $query->rowCount();
+				
+				if($numrows > 0)
+				{
+					// THIS SCHOOL OWNS THIS ELECTION
+					
+					// GET CURRENT ELECTION STATUS
+					$election_enabled = $query->fetchColumn();
+					
+					// TO TOGGLE THE ENABLED BIT, WE CAN DO SOME NICE BINARY MAGIC
+					$election_toggled = 1 - $election_enabled;
+					
+					$toggleelection = "UPDATE elections SET Enabled = :en WHERE ElectionID = :eid";
+					$query = $conn->prepare($toggleelection);
+					$query->bindParam(':en', $election_toggled);
+					$query->bindParam(':eid', $post_electionid);
+					$query->execute();
+					
+					echo "{ \"error\" : false , \"response\" : \"toggledelection\" }";
+				}
+				else
+				{
+					// ELECTION DOES NOT BELONG TO SCHOOL
+					// THIS SHOULD NEVER HAPPEN LEGITIMATELY
+					// LOG USER OUT
+					echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+				}
+			}
+			else
+			{
+				// USER IS NOT ENROLLED IN SCHOOL
+				echo "{ \"error\" : true , \"errorcode\" : 6 , \"response\" : \"notenrolled\" }";
+			}
+		}
+		else
+		{
+			// THERE IS NOBODY LOGGED IN
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
+	}
+	else if ($operation == "ENROLL")
+	{
+		// ENROLL IN AN EXISTING SCHOOL
+		
+		if(isTokenValid())
+		{
+			// LOGGED IN
+			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+			
+			$post_newadminemail = $data->email;
+			$post_schoolusername = $data->schoolid;
+			$post_username = $_SESSION["username"];
+			
+			if(!isUserAdmin($post_schoolusername))
+			{
+				echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+			}
+			else
+			{
+				// GET USERS ID FROM MYSQL AND MAKE SURE USER EXISTS
+				$getuserid = "SELECT UserID FROM users WHERE Email = :uname";
+				$query = $conn->prepare($getuserid);
+				$query->bindParam(':uname', $post_newadminemail);
+				$query->execute();
+				$mysql_userid = $query->fetchColumn();
+				$numrows = $query->rowCount();
+				
+				if($numrows == 0)
+				{
+					// USER DOES NOT EXIST
+					echo "{ \"error\" : true , \"errorcode\" : 15 , \"response\" : \"userdoesnotexist\" }";
+				}
+				else
+				{
+					// GET SCHOOLS ID FROM MYSQL
+					$getschoolid = "SELECT SchoolID FROM schools WHERE Username = :name";
+					$query = $conn->prepare($getschoolid);
+					$query->bindParam(':name', $post_schoolusername);
+					$query->execute();
+					$mysql_schoolid = $query->fetchColumn();
+					
+					// DELETE ALL OTHER ENROLLMENTS TO THIS SCHOOL IF EXISTS
+					$checkenrollment = "DELETE FROM enrollment WHERE UserID = :uid AND SchoolID = :sid";
+					$query = $conn->prepare($checkenrollment);
+					$query->bindParam(':uid', $mysql_userid);
+					$query->bindParam(':sid', $mysql_schoolid);
+					$query->execute();
+					
+					// ENROLL USER INTO SCHOOL
+					$makeadministrator = "INSERT INTO enrollment (UserID, SchoolID, Administrator) VALUES (:uid, :sid, 1)";
+					$query = $conn->prepare($makeadministrator);
+					$query->bindParam(':uid', $mysql_userid);
+					$query->bindParam(':sid', $mysql_schoolid);
+					$query->execute();
+					echo "{ \"error\" : false, \"response\" : \"enrolled\"}";
+				}
+			}
+		}
+		else
+		{
+			// NOT LOGGED IN
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
+	}
 	else
 	{
 		// INVALID OPERATION

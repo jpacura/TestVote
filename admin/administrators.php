@@ -54,7 +54,7 @@
             </tbody>
         </table>
         <button ng-click="gotoadminpanel(schoolid)">Return to Admin Panel</button>
-        <button>Create a New Administrator</button>
+        <button ng-click="addadmin(schoolid)">Create a New Administrator</button>
     </div>
     
     <!-- INVISIBLE FORM FOR POST DATA -->

@@ -26,12 +26,7 @@
     <div class="user-line">
         <h3><i class="fa fa-graduation-cap" aria-hidden="true"><b> Student Registration</b></i></h3>
     </div>
-    <p class="user-note">
-        A student can only register here after an administrator creates
-        a student account for them. Please use your full name and student ID.
-        If you have problems registering, please contact the school
-        administrator in charge of elections.
-    </p>
+    <p class="user-note"></p> <!-- This message was removed. This p was left in for style reasons -->
     <div class="registration">
         <div class="panel-body">
             <form novalidate class="input-field" name="registrationForm" method=post>

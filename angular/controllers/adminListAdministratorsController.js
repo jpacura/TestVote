@@ -121,6 +121,13 @@ myApp.controller('adminListAdministratorsController', ['$scope', '$http', functi
 				document.getElementById("refresh").submit();
 			}
 			
+			$scope.addadmin = function (schoolid)
+			{
+				document.getElementById("refresh").action = "addadministrator.php";
+				document.getElementById("schoolidrefresh").value = schoolid;
+				document.getElementById("refresh").submit();
+			}
+			
 			//$scope.vote = function (electionid, schoolid)
 			//{
 				//document.getElementById("electionidpost").value = electionid;

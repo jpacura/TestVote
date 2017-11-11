@@ -57,10 +57,10 @@
                 </td>
                 
                 <td ng-if="x.Enabled == 1">
-					<button>Disable Election</button>
+					<button ng-click="toggle(schoolid, x.ElectionID)">Disable Election</button>
                 </td>
                 <td ng-if="x.Enabled == 0">
-					<button>Enable Election</button>
+					<button ng-click="toggle(schoolid, x.ElectionID)">Enable Election</button>
                 </td>
                 
                 <td>
@@ -79,7 +79,7 @@
 
 
     <!-- INVISIBLE FORM FOR POST DATA -->
-    <form method="post" id="refresh" action="users.php">
+    <form method="post" id="refresh" action="elections.php">
         <input type="hidden" id="schoolidrefresh" name="school">
     </form>
     
