@@ -69,6 +69,31 @@ myApp.controller('adminSelectElectionController', ['$scope', '$http', function (
 				document.getElementById("refresh").submit();
 			}
 			
+			$scope.createelection = function (schoolid)
+			{
+				document.getElementById("refresh").action = "create.php";
+				document.getElementById("schoolidrefresh").value = schoolid;
+				document.getElementById("refresh").submit();
+			}
+			
+			$scope.results = function (schoolid, electionid)
+			{
+				var text = "FUNCTION \"results\" NOT IMPLEMENTED YET!\nRECEIVED DATA schoolid " + schoolid + " electionid " + electionid;
+				alert(text);
+			}
+			
+			$scope.editelection = function (schoolid, electionid)
+			{
+				var text = "FUNCTION \"editelection\" NOT IMPLEMENTED YET!\nRECEIVED DATA schoolid " + schoolid + " electionid " + electionid;
+				alert(text);
+			}
+			
+			$scope.deleteelection = function (schoolid, electionid)
+			{
+				var text = "FUNCTION \"deleteelection\" NOT IMPLEMENTED YET!\nRECEIVED DATA schoolid " + schoolid + " electionid " + electionid;
+				alert(text);
+			}
+			
 			$scope.toggle = function (schoolid, electionid) {
 
 				var UserLoginData = "{\"operation\" : \"TOGGLEELECTION\", \"schoolusername\" : \"" + schoolid + "\" , \"electionid\" : \"" + electionid + "\" }";

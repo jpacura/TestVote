@@ -43,6 +43,7 @@
                 <th>Toggle Visibility</th>
                 <th>View Results</th>
                 <th>Edit Election</th>
+                <th>Delete Election</th>
             </tr>
             </thead>
             <tbody>
@@ -64,17 +65,21 @@
                 </td>
                 
                 <td>
-                    <button>View Results</button>
+                    <button ng-click="results(schoolid, x.ElectionID)">View Results</button>
                 </td>
                 
                 <td>
-                    <button>Edit Election</button>
+                    <button ng-click="editelection(schoolid, x.ElectionID)">Edit Election</button>
+                </td>
+                
+                <td>
+                    <button ng-click="deleteelection(schoolid, x.ElectionID)">Delete Election</button>
                 </td>
             </tr>
             </tbody>
         </table>
         <button ng-click="gotoadminpanel(schoolid)">Return to Admin Panel</button>
-        <button>Create a New Election</button>
+        <button ng-click="createelection(schoolid)">Create a New Election</button>
     </div>
 
 

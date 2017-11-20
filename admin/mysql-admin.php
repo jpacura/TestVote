@@ -406,6 +406,35 @@
 			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
 		}
 	}
+	else if ($operation == "VALIDATELOGIN")
+	{
+		// MAKE SURE USER IS ADMINISTRATOR AND PROPERLY SIGNED IN
+		
+		$post_schoolusername = $data->schoolusername;
+		$post_username = $_SESSION["username"];
+		
+		// CHECK IF VALID USER IS LOGGED IN
+		if(isTokenValid())
+		{
+			// THERE IS A VALID USER LOGGED IN
+			// CHECK TO SEE IF THEY ARE AN ADMINISTRATOR OF THE SCHOOL
+			if(isUserAdmin($post_schoolusername))
+			{
+				// USER IS ENROLLED IN SCHOOL
+				echo "{ \"error\" : false , \"response\" : \"loggedin\" }";
+			}
+			else
+			{
+				// USER IS NOT ENROLLED IN SCHOOL
+				echo "{ \"error\" : true , \"errorcode\" : 6 , \"response\" : \"notenrolled\" }";
+			}
+		}
+		else
+		{
+			// THERE IS NOBODY LOGGED IN
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
+	}
 	else
 	{
 		// INVALID OPERATION

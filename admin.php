@@ -30,12 +30,12 @@
     </div>
     <div class="registration">
         <p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
-        <div class="panel-body">
-			<button ng-click="viewstudents(schoolid)">View Students</button>
-			<button ng-click="viewadministrators(schoolid)">View Administrators</button>
-			<button ng-click="viewelections(schoolid)">View Elections</button>
-        </div>
-        
+		<button ng-click="viewstudents(schoolid)">View Students</button>
+		<button ng-click="viewadministrators(schoolid)">View Administrators</button>
+		<button ng-click="viewelections(schoolid)">View Elections</button>
+		<br>
+		<button ng-click="schools()">Return to Enrolled Schools</button>
+	
         <!-- INVISIBLE FORM FOR POST DATA -->
 		<form method="post" id="gotopage" action="">
 			<input type="hidden" id="schoolidform" name="school">

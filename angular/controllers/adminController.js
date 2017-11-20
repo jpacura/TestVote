@@ -79,4 +79,9 @@ myApp.controller('adminController', ['$scope', '$http', function ($scope, $http)
 				document.getElementById("gotopage").submit();
 			}
 			
+			$scope.schools = function ()
+			{
+				window.location.href = "schools.php";
+			}
+			
 }]);
