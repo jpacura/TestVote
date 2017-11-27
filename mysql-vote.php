@@ -156,6 +156,86 @@
 			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
 		}
 	}
+	else if($operation == "VOTE")
+	{
+		$post_schoolusername = $data->schoolusername;
+		$post_electionid = $data->electionid;
+		$post_username = $_SESSION["username"];
+		$post_formdata = $data->formdata;
+		
+		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+		
+		// GET USERS ID FROM MYSQL
+		$getuserid = "SELECT UserID FROM users WHERE Email = :uname";
+		$query = $conn->prepare($getuserid);
+		$query->bindParam(':uname', $post_username);
+		$query->execute();
+		$mysql_userid = $query->fetchColumn();
+		
+		
+		if(isTokenValid())
+		{
+			if(isUserEnrolled($post_schoolusername))
+			{
+				if(isElectionValid($post_schoolusername, $post_electionid))
+				{
+					$checkifvoted = "SELECT VoteID FROM userVote WHERE UserID = :uid AND ElectionID = :eid";
+					$query = $conn->prepare($checkifvoted);
+					$query->bindParam(':uid', $mysql_userid);
+					$query->bindParam(':eid', $post_electionid);
+					$query->execute();
+					$rowcount = $query->rowCount();
+					
+					if($rowcount == 0)
+					{
+						// MARK USER AS VOTED
+						$vote = "INSERT INTO userVote (UserID, ElectionID) VALUES (:uid, :eid)";
+						$query = $conn->prepare($vote);
+						$query->bindParam(':uid', $mysql_userid);
+						$query->bindParam(':eid', $post_electionid);
+						$query->execute();
+						
+						$vote_id = $conn->lastInsertId();
+						
+						// INSERT ALL VOTES INTO DATABASE
+						foreach($post_formdata as $k => $v)
+						{
+							$addVote = "INSERT INTO vote (VoteID, UserID, QuestionID, OptionID) VALUES (:vid, :uid, :qid, :oid)";
+							$query = $conn->prepare($addVote);
+							$query->bindParam(':vid', $vote_id);
+							$query->bindParam(':uid', $mysql_userid);
+							$query->bindParam(':qid', $k);
+							$query->bindParam(':oid', $v);
+							$query->execute();
+						}
+						
+						echo "{ \"error\" : false }";
+					}
+					else
+					{
+						// USER HAS ALREADY VOTED
+						echo "{ \"error\" : true , \"errorcode\" : 13 , \"response\" : \"alreadyvoted\" }";
+					}
+					
+				}
+				else
+				{
+					// ELECTION IS NOT VALID
+					echo "{ \"error\" : true , \"errorcode\" : 11 , \"response\" : \"electioninvalid\" }";
+				}
+			}
+			else
+			{
+				// USER IS NOT ENROLLED
+				echo "{ \"error\" : true , \"errorcode\" : 6 , \"response\" : \"notenrolled\" }";
+			}
+		}
+		else
+		{
+			// TOKEN IS NOT VALID
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
+	}
 	else
 	{
 		// INVALID OPERATION

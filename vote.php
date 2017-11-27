@@ -31,27 +31,25 @@
 		
 		<p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
 		<div class="ng-hide" ng-show="isElectionVisible">
-			<form action="TEMP/recordvote.php" method="POST">
+			<form method="POST">
 				<div ng-repeat="(qid,q) in questions">
-					<div style="border:1px solid" >
+					<div style="border:1px solid; padding:15px; margin:15px" >
 						<div ng-repeat="(k, v) in q">
 							<div ng-if="$index == 0">
 								<div ng-repeat="(id,name) in v">
-									<h2>{{name}}</h2>
+									<b style="font-size: 18pt">{{name}}</b>
 								</div>
 							</div>
 							<div ng-if="$index != 0">
 								<div ng-repeat="(id,name) in v">
-									<input type="radio" name="{{qid}}" value="{{id}}">{{name}}
+									<input style="margin-top: 15px" type="radio" ng-model="formdata[qid]" name="{{qid}}" value="{{id}}">{{name}}
 								</div>
 							</div>
-							<br>
 						</div>
 					</div>
-					<br>
 				</div>
 				<br>
-				<input type="submit" value="Vote!">
+				<button ng-click="submitvotes()">Vote!</button>
 				<input type="hidden" id="schoolidpost" name="schoolid">
 				<input type="hidden" id="electionidpost" name="electionid">
 			</form>

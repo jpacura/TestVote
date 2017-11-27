@@ -51,7 +51,7 @@
 				if(empty($post_electionname))
 				{
 					// ELECTION HAS NO NAME
-					echo "{ \"error\" : true }";
+					echo "{ \"error\" : true , \"errorcode\" : 16 , \"response\" : \"namemissing\" }";
 				}
 				else
 				{
@@ -68,29 +68,46 @@
 					{
 						foreach ($question as $questionname => $options)
 						{
-							$createquestion = "INSERT INTO question (ElectionID, Name, QuestionOrder) VALUES (:eid, :qname, :order)";
-							$query = $conn->prepare($createquestion);
-							$query->bindParam(':eid', $electionid);
-							$query->bindParam(':qname', $questionname);
-							$query->bindParam(':order', $questionnumber);
-							$query->execute();
-							$questionid = $conn->lastInsertId();
-							
-							$optionnumber = 1;
-							
-							foreach ($options as $value)
+							if(count($options) == 0)
 							{
-								$createoption = "INSERT INTO questionOptions (QuestionID, Value, OptionOrder) VALUES (:qid, :val, :order)";
-								$query = $conn->prepare($createoption);
-								$query->bindParam(':qid', $questionid);
-								$query->bindParam(':val', $value);
-								$query->bindParam(':order', $optionnumber);
-								$query->execute();
+								// QUESTION HAS NO OPTIONS
+								// THIS SHOULD NOT BE ALLOWED BY THE FRONTEND
+								// WE WILL VALIDATE ANYWAY IN CASE OF FORM TAMPERING
 								
-								$optionnumber = $optionnumber + 1;
+								// DELETE UNFINISHED ELECTION FROM DATABASE
+								// THE FOREIGN KEY CONSTRAINTS WILL ALSO DELETE THE BAD QUESTIONS
+								$deleteelection = "DELETE FROM elections WHERE ElectionID = :eid";
+								$query = $conn->prepare($deleteelection);
+								$query->bindParam(':eid', $electionid);
+								$query->execute();
+								echo "{ \"error\" : true , \"errorcode\" : 17 , \"response\" : \"optionmissing\" }";
 							}
-							
-							$questionnumber = $questionnumber + 1;
+							else
+							{
+								$createquestion = "INSERT INTO question (ElectionID, Name, QuestionOrder) VALUES (:eid, :qname, :order)";
+								$query = $conn->prepare($createquestion);
+								$query->bindParam(':eid', $electionid);
+								$query->bindParam(':qname', $questionname);
+								$query->bindParam(':order', $questionnumber);
+								$query->execute();
+								$questionid = $conn->lastInsertId();
+								
+								$optionnumber = 1;
+								
+								foreach ($options as $value)
+								{
+									$createoption = "INSERT INTO questionOptions (QuestionID, Value, OptionOrder) VALUES (:qid, :val, :order)";
+									$query = $conn->prepare($createoption);
+									$query->bindParam(':qid', $questionid);
+									$query->bindParam(':val', $value);
+									$query->bindParam(':order', $optionnumber);
+									$query->execute();
+									
+									$optionnumber = $optionnumber + 1;
+								}
+								
+								$questionnumber = $questionnumber + 1;
+							}
 						}
 					}
 					

@@ -26,6 +26,11 @@
 </div>
 
 <div class="mainArea" ng-controller="adminCreateController">
+	
+	<div class="message">
+        <div class="alert" id="tableerrortext" ng-if="isError">{{errtext}}</div>
+    </div>
+	
 	<form novalidate class="input-field" name="newelection" method=post>
 		<div>
 			<p>
@@ -45,7 +50,11 @@
 		<button ng-click="createelection(schoolid)" style="margin-left:20px">Create Election</button>
 	</form>
 	
-	<p>{{temp}}</p>
+	<!-- INVISIBLE FORM FOR POST DATA -->
+    <form method="post" id="refresh" action="elections.php">
+        <input type="hidden" id="schoolidrefresh" name="school">
+    </form>
+	
 </div>
 
 

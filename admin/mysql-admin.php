@@ -342,6 +342,81 @@
 			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
 		}
 	}
+	else if ($operation == "DELETEELECTION")
+	{
+		// LIST ALL ELECTIONS THAT THE SELECTED SCHOOL HAS
+		
+		$post_schoolusername = $data->schoolusername;
+		$post_electionid = $data->electionid;
+		$post_username = $_SESSION["username"];
+		
+		// CHECK IF VALID USER IS LOGGED IN
+		if(isTokenValid())
+		{
+			// THERE IS A VALID USER LOGGED IN
+			// CHECK TO SEE IF THEY ARE ENROLLED IN THE SCHOOL
+			if(isUserAdmin($post_schoolusername))
+			{
+				// USER IS ENROLLED IN SCHOOL
+				$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+		
+				// GET USERS ID FROM MYSQL
+				$getuserid = "SELECT UserID,Name FROM users WHERE Email = :uname";
+				$query = $conn->prepare($getuserid);
+				$query->bindParam(':uname', $post_username);
+				$query->execute();
+				$results = $query->fetch(PDO::FETCH_ASSOC);
+				$mysql_userid = $results['UserID'];
+				$mysql_username = $results['Name'];
+				
+				// GET SCHOOLS ID FROM MYSQL
+				$getschoolid = "SELECT SchoolID,Name FROM schools WHERE Username = :name";
+				$query = $conn->prepare($getschoolid);
+				$query->bindParam(':name', $post_schoolusername);
+				$query->execute();
+				$results = $query->fetch(PDO::FETCH_ASSOC);
+				$mysql_schoolid = $results['SchoolID'];
+				$mysql_schoolname = $results['Name'];
+				
+				// CHECK IF ELECTION ACTUALLY BELONGS TO REQUESTING SCHOOL
+				$checkschool = "SELECT Enabled FROM elections WHERE ElectionID = :eid AND SchoolID = :sid";
+				$query = $conn->prepare($checkschool);
+				$query->bindParam(':eid', $post_electionid);
+				$query->bindParam(':sid', $mysql_schoolid);
+				$query->execute();
+				$numrows = $query->rowCount();
+				
+				if($numrows > 0)
+				{
+					// THIS SCHOOL OWNS THIS ELECTION
+					
+					$deleteelection = "DELETE FROM elections WHERE ElectionID = :eid";
+					$query = $conn->prepare($deleteelection);
+					$query->bindParam(':eid', $post_electionid);
+					$query->execute();
+					
+					echo "{ \"error\" : false , \"response\" : \"electiondeleted\" }";
+				}
+				else
+				{
+					// ELECTION DOES NOT BELONG TO SCHOOL
+					// THIS SHOULD NEVER HAPPEN LEGITIMATELY
+					// LOG USER OUT
+					echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+				}
+			}
+			else
+			{
+				// USER IS NOT ENROLLED IN SCHOOL
+				echo "{ \"error\" : true , \"errorcode\" : 6 , \"response\" : \"notenrolled\" }";
+			}
+		}
+		else
+		{
+			// THERE IS NOBODY LOGGED IN
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
+	}
 	else if ($operation == "ENROLL")
 	{
 		// ENROLL IN AN EXISTING SCHOOL

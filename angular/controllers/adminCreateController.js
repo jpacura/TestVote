@@ -60,7 +60,45 @@ myApp.controller('adminCreateController', ['$scope', '$http', '$compile', functi
 					function successCallback(response) {
 						console.log('server says:' + response.data);
 						
-						$scope.temp = response.data;
+						if(response.data.error)
+						{
+							// THERE IS AN ERROR
+							var errout = "ERROR: UNKNOWN SERVER ERROR!";
+							if(response.data.errorcode == 5)
+							{
+								// NOT LOGGED IN
+								errout = "ERROR: NOT LOGGED IN!";
+								window.location.href = "../logout.php";
+							}
+							else if(response.data.errorcode == 6)
+							{
+								// NOT ENROLLED IN SCHOOL
+								errout = "ERROR: NOT ENROLLED IN SELECTED SCHOOL!";
+								window.location.href = "../schools.php";
+							}
+							else if(response.data.errorcode == 16)
+							{
+								// ELECTION NAME MISSING
+								errout = "Election Name is Missing!";
+							}
+							else if(response.data.errorcode == 17)
+							{
+								// OPTIONS ARE MISSING
+								// THIS CAN ONLY OCCUR WITH FRONTEND TAMPERING
+								// NO NEED FOR CLEAN ERROR MESSAGE
+								// JUST LOG THE HACKER OUT
+								window.location.href = "../logout.php";
+							}
+							
+							$scope.errtext = errout;
+							$scope.isError = true;
+						}
+						else
+						{
+							// NO ERROR
+							document.getElementById("schoolidrefresh").value = schoolid;
+							document.getElementById("refresh").submit();
+						}
 						
 					},
 					function errorCallback(response) {
