@@ -188,6 +188,8 @@
 					
 					if($rowcount == 0)
 					{
+						// MAKE SURE THE USER ACTUALLY SELECTED SOME VOTE OPTIONS
+						
 						// MARK USER AS VOTED
 						$vote = "INSERT INTO userVote (UserID, ElectionID) VALUES (:uid, :eid)";
 						$query = $conn->prepare($vote);
@@ -196,10 +198,12 @@
 						$query->execute();
 						
 						$vote_id = $conn->lastInsertId();
-						
+							
 						// INSERT ALL VOTES INTO DATABASE
+						$counter = 0;
 						foreach($post_formdata as $k => $v)
 						{
+							$counter = $counter + 1;
 							$addVote = "INSERT INTO vote (VoteID, UserID, QuestionID, OptionID) VALUES (:vid, :uid, :qid, :oid)";
 							$query = $conn->prepare($addVote);
 							$query->bindParam(':vid', $vote_id);
@@ -209,7 +213,22 @@
 							$query->execute();
 						}
 						
-						echo "{ \"error\" : false }";
+						if($counter == 0)
+						{
+							// NO VOTES WERE RECORDED
+							
+							// REMOVE EMPTY VOTE RECORD
+							$delvote = "DELETE FROM userVote WHERE VoteID = :vid";
+							$query = $conn->prepare($delvote);
+							$query->bindParam(':vid', $vote_id);
+							$query->execute();
+							
+							echo "{ \"error\" : true , \"errorcode\" : 17 , \"response\" : \"optionmissing\" }";
+						}
+						else
+						{
+							echo "{ \"error\" : false }";
+						}
 					}
 					else
 					{

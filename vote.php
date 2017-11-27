@@ -29,7 +29,9 @@
 		<h2>Welcome, {{studentusername}}</h2>
 		<h3>{{electionname}} for {{schoolname}}:</h3>
 		
-		<p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
+		<div style="margin-left:20px; margin-right:20px; margin-bottom: 1rem; border-radius: 0.25rem; background-color: #f2dede; border-color: #ebcccc; color: #a94442;">
+			<p class="ng-hide" id="errortext" ng-show="isError">{{errtext}}</p>
+		</div>
 		<div class="ng-hide" ng-show="isElectionVisible">
 			<form method="POST">
 				<div ng-repeat="(qid,q) in questions">

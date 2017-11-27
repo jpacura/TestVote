@@ -130,9 +130,6 @@ myApp.controller('voteController', ['$scope', '$http', function ($scope, $http) 
 					else if(response.data.errorcode == 10)
 					{
 						// NO ELECTIONS
-						$scope.studentusername = response.data.name;
-						$scope.schoolname = response.data.schoolname;
-						$scope.electionname = response.data.electionname;
 						errout = "The school currently has no elections!";
 						$scope.errtext = errout;
 						$scope.isElectionVisible = false;
@@ -146,9 +143,6 @@ myApp.controller('voteController', ['$scope', '$http', function ($scope, $http) 
 					else if(response.data.errorcode == 12)
 					{
 						// NO QUESTIONS
-						$scope.studentusername = response.data.name;
-						$scope.schoolname = response.data.schoolname;
-						$scope.electionname = response.data.electionname;
 						errout = "This election has no questions!";
 						$scope.errtext = errout;
 						$scope.isElectionVisible = false;
@@ -157,12 +151,16 @@ myApp.controller('voteController', ['$scope', '$http', function ($scope, $http) 
 					else if(response.data.errorcode == 13)
 					{
 						// USER ALREADY VOTED
-						$scope.studentusername = response.data.name;
-						$scope.schoolname = response.data.schoolname;
-						$scope.electionname = response.data.electionname;
 						errout = "You have already voted in this election!";
 						$scope.errtext = errout;
 						$scope.isElectionVisible = false;
+						$scope.isError = true;
+					}
+					else if(response.data.errorcode == 17)
+					{
+						// USER SELECTED NO OPTIONS
+						errout = "You did not select any options!";
+						$scope.errtext = errout;
 						$scope.isError = true;
 					}
 					
