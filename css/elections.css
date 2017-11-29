@@ -8,6 +8,7 @@
 }
 
 .table-responsive {
+    overflow: auto;
     margin: 2em auto;
 }
 
@@ -47,8 +48,7 @@
     color: white;
 }
 
-
-.mainArea .message{
+.mainArea .message {
     width: 80%;
     min-width: 320px;
     margin: 1em auto;
@@ -60,6 +60,38 @@
     padding: 5px;
     border-radius: 0.25rem;
     background-color: #f2dede;
-    border:1px solid #ebcccc;
+    border: 1px solid #ebcccc;
     color: #a94442;
+}
+
+.questionForm {
+    border: 1px solid rgba(35, 35, 77, 0.69);
+    border-radius: 5px;
+    padding: 8px 1em;
+}
+
+.submitBtn {
+    float: right;
+    clear: both;
+    margin: 1em;
+    padding: 5px;
+    background: white;
+    color: #F6A704;
+    border: 1px solid #F6A704;
+    font-size: 0.8em;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.submitBtn:hover {
+    background: #F6A704;
+    color: white;
+    border: 1px solid white;
+}
+
+@media screen and (max-width: 500px) {
+    .questionForm {
+        margin: auto;
+        width: 80%;
+    }
 }

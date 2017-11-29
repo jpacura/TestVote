@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61fe0388-d721-4fb6-bf8d-5a2c0f82fd73" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/angular/dependence/angular-animate.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/angular/dependence/angular-aria.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/angular/dependence/angular-material.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/angular/dependence/angular-messages.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/angular/dependence/angular-route.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/angular/dependence/fontawsome.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/angular-material.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/angular/controllers/myApp.js" afterPath="$PROJECT_DIR$/angular/controllers/myApp.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/login.css" afterPath="$PROJECT_DIR$/css/login.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/elections.php" afterPath="$PROJECT_DIR$/elections.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enroll.php" afterPath="$PROJECT_DIR$/enroll.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login.php" afterPath="$PROJECT_DIR$/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/register.php" afterPath="$PROJECT_DIR$/register.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/registerschool.php" afterPath="$PROJECT_DIR$/registerschool.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/angular/controllers/selectSchoolController.js" afterPath="$PROJECT_DIR$/angular/controllers/selectSchoolController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/angular/controllers/voteController.js" afterPath="$PROJECT_DIR$/angular/controllers/voteController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/elections.css" afterPath="$PROJECT_DIR$/css/elections.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/selectSchool.css" afterPath="$PROJECT_DIR$/css/selectSchool.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schools.php" afterPath="$PROJECT_DIR$/schools.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vote.php" afterPath="$PROJECT_DIR$/vote.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,7 +19,28 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="239">
+              <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="selectSchool.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/css/selectSchool.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -59,9 +72,7 @@
         <option value="$PROJECT_DIR$/images/logoblack.svg" />
         <option value="$PROJECT_DIR$/css/registration.css" />
         <option value="$PROJECT_DIR$/css/registerstudent.css" />
-        <option value="$PROJECT_DIR$/css/navibar.css" />
         <option value="$PROJECT_DIR$/mysql-users.php" />
-        <option value="$PROJECT_DIR$/css/main.css" />
         <option value="$PROJECT_DIR$/admin.php" />
         <option value="$PROJECT_DIR$/angular/loginController.js" />
         <option value="$PROJECT_DIR$/angular/studentController.js" />
@@ -76,18 +87,23 @@
         <option value="$PROJECT_DIR$/registration.php" />
         <option value="$PROJECT_DIR$/registerstudent.php" />
         <option value="$PROJECT_DIR$/selectschool.php" />
-        <option value="$PROJECT_DIR$/angular/controllers/selectSchoolController.js" />
         <option value="$PROJECT_DIR$/angular/controllers/enrollController.js" />
-        <option value="$PROJECT_DIR$/css/selectSchool.css" />
-        <option value="$PROJECT_DIR$/css/elections.css" />
         <option value="$PROJECT_DIR$/angular/controllers/myApp.js" />
         <option value="$PROJECT_DIR$/login.php" />
         <option value="$PROJECT_DIR$/css/login.css" />
         <option value="$PROJECT_DIR$/registerschool.php" />
-        <option value="$PROJECT_DIR$/schools.php" />
         <option value="$PROJECT_DIR$/register.php" />
         <option value="$PROJECT_DIR$/enroll.php" />
+        <option value="$PROJECT_DIR$/css/vote.css" />
+        <option value="$PROJECT_DIR$/css/navibar.css" />
+        <option value="$PROJECT_DIR$/css/main.css" />
         <option value="$PROJECT_DIR$/elections.php" />
+        <option value="$PROJECT_DIR$/css/elections.css" />
+        <option value="$PROJECT_DIR$/vote.php" />
+        <option value="$PROJECT_DIR$/schools.php" />
+        <option value="$PROJECT_DIR$/css/selectSchool.css" />
+        <option value="$PROJECT_DIR$/angular/controllers/selectSchoolController.js" />
+        <option value="$PROJECT_DIR$/angular/controllers/voteController.js" />
       </list>
     </option>
   </component>
@@ -99,9 +115,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="185" />
+    <option name="x" value="17" />
     <option name="y" value="23" />
-    <option name="width" value="1255" />
+    <option name="width" value="1231" />
     <option name="height" value="808" />
   </component>
   <component name="ProjectView">
@@ -120,6 +136,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -141,19 +158,12 @@
             <path>
               <item name="TestVote" type="b2602c69:ProjectViewProjectNode" />
               <item name="TestVote" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="angular" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="dependence" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="TestVote" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TestVote" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -229,16 +239,21 @@
       <workItem from="1509072221949" duration="467000" />
       <workItem from="1509159055049" duration="980000" />
       <workItem from="1509217417518" duration="8670000" />
+      <workItem from="1509649342064" duration="28000" />
+      <workItem from="1509681547772" duration="3112000" />
+      <workItem from="1511891076372" duration="3886000" />
+      <workItem from="1511977228152" duration="14989000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81235000" />
+    <option name="totallyTimeSpent" value="103250000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="185" y="23" width="1255" height="808" extended-state="0" />
+    <frame x="17" y="23" width="1231" height="808" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2812749" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27944762" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
@@ -269,23 +284,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/registerstudent.php" />
-    <entry file="file://$PROJECT_DIR$/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="78" lean-forward="true" selection-start-line="22" selection-start-column="78" selection-end-line="22" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dump.php" />
-    <entry file="file://$PROJECT_DIR$/css/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1290">
-          <caret line="86" column="12" lean-forward="true" selection-start-line="86" selection-start-column="12" selection-end-line="86" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -330,46 +328,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/logo.svg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="55" lean-forward="false" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/logoblack.svg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/registerstudent.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="70" column="38" lean-forward="true" selection-start-line="70" selection-start-column="38" selection-end-line="70" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dump.php" />
     <entry file="file://$PROJECT_DIR$/registration.php" />
     <entry file="file://$PROJECT_DIR$/selectschool.php" />
-    <entry file="file://$PROJECT_DIR$/admin.php" />
-    <entry file="file://$PROJECT_DIR$/angular/controllers/registerController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/registerstudent.php" />
-    <entry file="file://$PROJECT_DIR$/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/angular/directives/passwordMatch.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -379,57 +341,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/angular/controllers/schoolController.js.orig" />
     <entry file="file://$PROJECT_DIR$/angular/controllers/selectSchoolController.js.orig" />
-    <entry file="file://$PROJECT_DIR$/angular/controllers/enrollController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="16" lean-forward="false" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/angular/controllers/selectElectionController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="14" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysql-elections.php">
+    <entry file="file://$PROJECT_DIR$/css/angular-material.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/navibar.css">
+    <entry file="file://$PROJECT_DIR$/css/login.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="28" lean-forward="false" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="374">
+          <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/registration.css">
+    <entry file="file://$PROJECT_DIR$/angular/controllers/loginController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="75" column="19" lean-forward="false" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
+        <state relative-caret-position="540">
+          <caret line="36" column="21" lean-forward="true" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular/dependence/fontawsome.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/angular/dependence/angular.min.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular/dependence/angular-animate.min.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logout.php">
+    <entry file="file://$PROJECT_DIR$/angular/dependence/angular-route.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="-1071">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular/controllers/schoolController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-182">
+          <caret line="18" column="52" lean-forward="true" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -450,10 +417,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/angular/controllers/enrollController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="25" column="20" lean-forward="true" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular/controllers/studentController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular/controllers/registerController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mysql-schools.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1500">
-          <caret line="100" column="4" lean-forward="false" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
+        <state relative-caret-position="5250">
+          <caret line="350" column="5" lean-forward="true" selection-start-line="350" selection-start-column="5" selection-end-line="350" selection-end-column="5" />
           <folding>
             <marker date="1508707922000" expanded="true" signature="759:811" ph="SELECT Usern... schools" />
             <marker date="1508707922000" expanded="true" signature="1160:1219" ph="INSERT INTO schools... " />
@@ -479,114 +467,132 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/angular/controllers/studentController.js">
+    <entry file="file://$PROJECT_DIR$/images/logo.svg">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+        <state relative-caret-position="120">
+          <caret line="8" column="55" lean-forward="false" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/logoblack.svg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="59" lean-forward="false" selection-start-line="38" selection-start-column="58" selection-end-line="38" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/angular/controllers/selectSchoolController.js">
+    <entry file="file://$PROJECT_DIR$/angular/controllers/selectElectionController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="89" column="4" lean-forward="false" selection-start-line="89" selection-start-column="4" selection-end-line="89" selection-end-column="4" />
+        <state relative-caret-position="405">
+          <caret line="27" column="28" lean-forward="false" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/angular/controllers/schoolController.js">
+    <entry file="file://$PROJECT_DIR$/css/registration.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="52" lean-forward="true" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+        <state relative-caret-position="14">
+          <caret line="51" column="32" lean-forward="true" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/elections.css">
+    <entry file="file://$PROJECT_DIR$/css/registerstudent.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="30" column="23" lean-forward="true" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+        <state relative-caret-position="735">
+          <caret line="49" column="42" lean-forward="true" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/selectSchool.css">
+    <entry file="file://$PROJECT_DIR$/css/vote.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="8" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="64" selection-end-column="1" />
+        <state relative-caret-position="15">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/angular/dependence/fontawsome.js">
+    <entry file="file://$PROJECT_DIR$/css/navibar.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/angular/dependence/angular-animate.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/angular/controllers/myApp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="48" lean-forward="true" selection-start-line="0" selection-start-column="48" selection-end-line="0" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/angular-material.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/angular/controllers/loginController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="21" lean-forward="true" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+        <state relative-caret-position="345">
+          <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="61" lean-forward="true" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
+        <state relative-caret-position="540">
+          <caret line="36" column="43" lean-forward="true" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/register.php">
+    <entry file="file://$PROJECT_DIR$/css/elections.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="80" column="70" lean-forward="true" selection-start-line="80" selection-start-column="70" selection-end-line="80" selection-end-column="70" />
+        <state relative-caret-position="105">
+          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mysql-elections.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="114" column="8" lean-forward="true" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="8" />
+          <folding>
+            <marker date="1510789843409" expanded="true" signature="912:962" ph="SELECT UserI... users" />
+            <marker date="1510789843409" expanded="true" signature="1264:1320" ph="SELECT Schoo... schools" />
+            <marker date="1510789843409" expanded="true" signature="1648:1724" ph="SELECT Admin... enrollment" />
+            <marker date="1510789843409" expanded="true" signature="2573:2855" ph="SELECT Elect... elections" />
+            <marker date="1510789843409" expanded="true" signature="2666:2760" ph="SELECT UserI... userVote" />
+            <marker date="1510789843409" expanded="true" signature="2774:2854" ph="SELECT Quest... question" />
+            <marker date="1510789843409" expanded="true" signature="4318:4363" ph="SELECT UserI... users" />
+            <marker date="1510789843409" expanded="true" signature="4781:4841" ph="SELECT Token... tokens" />
+            <marker date="1510789843409" expanded="true" signature="5801:5846" ph="SELECT UserI... users" />
+            <marker date="1510789843409" expanded="true" signature="6049:6100" ph="SELECT Schoo... schools" />
+            <marker date="1510789843409" expanded="true" signature="6317:6388" ph="SELECT Schoo... enrollment" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/enroll.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="70" lean-forward="false" selection-start-line="15" selection-start-column="70" selection-end-line="15" selection-end-column="70" />
+        <state relative-caret-position="-31">
+          <caret line="11" column="54" lean-forward="true" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elections.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/register.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-496">
+          <caret line="28" column="49" lean-forward="true" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
           <folding />
         </state>
       </provider>
@@ -599,18 +605,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/elections.php">
+    <entry file="file://$PROJECT_DIR$/vote.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="53" column="10" lean-forward="true" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
+        <state relative-caret-position="241">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular/controllers/myApp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="48" lean-forward="false" selection-start-line="0" selection-start-column="48" selection-end-line="0" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular/controllers/selectSchoolController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular/controllers/voteController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/schools.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="29" column="59" lean-forward="true" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="59" />
+        <state relative-caret-position="1050">
+          <caret line="70" column="19" lean-forward="true" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/selectSchool.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
           <folding />
         </state>
       </provider>
