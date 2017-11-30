@@ -2,13 +2,39 @@
     border-bottom: solid 1px #f6a704;
     width: 80%;
     min-width: 320px;
-    margin: 1em auto;
+    margin: 1em auto 0 auto;
     display: block;
     font-weight: bolder;
 }
 
+.user-line button{
+    align-items: center;
+}
+
+.operationArea{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.operationArea md-content{
+    display: flex;
+}
+
+
+
+.operationArea table .thead{
+    width: 152px;
+    text-align: left;
+}
+
+.operationArea table .tbody{
+    width: 200px;
+    text-align: center;
+}
+
 .table-responsive {
-   margin: 2em auto;
+    overflow: auto;
+    margin: 2em auto;
 }
 
 .table {
@@ -48,7 +74,12 @@
 }
 
 
-.mainArea .message{
+.buttonGroup{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mainArea .message {
     width: 80%;
     min-width: 320px;
     margin: 1em auto;
@@ -60,6 +91,6 @@
     padding: 5px;
     border-radius: 0.25rem;
     background-color: #f2dede;
-    border:1px solid #ebcccc;
+    border: 1px solid #ebcccc;
     color: #a94442;
 }
