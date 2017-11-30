@@ -145,6 +145,13 @@
 				{
 					$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 					
+					// GET SCHOOLS NAME FROM MYSQL
+					$getschoolid = "SELECT SchoolID,Name FROM schools WHERE Username = :name";
+					$query = $conn->prepare($getschoolid);
+					$query->bindParam(':name', $post_schoolusername);
+					$query->execute();
+					$mysql_schoolname = $query->fetchColumn();
+					
 					// CHECK IF ELECTION ID EXISTS
 					$getelectionid = "SELECT Name FROM elections WHERE ElectionID = :eid";
 					$query = $conn->prepare($getelectionid);
@@ -178,7 +185,7 @@
 						{
 							$results = $query->fetchAll(PDO::FETCH_ASSOC);
 							
-							$ret = "{ \"error\" : false , \"electionname\" : \"$mysql_electionname\" , \"results\" : {";
+							$ret = "{ \"error\" : false , \"electionname\" : \"$mysql_electionname\" , \"schoolname\" : \"$mysql_schoolname\" , \"results\" : {";
 							
 							foreach($results as $q)
 							{
@@ -187,7 +194,7 @@
 								
 								$ret = "$ret \"$question_name\" : {";
 								
-								$getvotes = "SELECT questionOptions.Value, vote.OptionID, count(*) AS Votes FROM vote LEFT JOIN questionOptions ON questionOptions.OptionID = vote.OptionID WHERE questionOptions.QuestionID = :qid GROUP BY vote.OptionID";
+								$getvotes = "SELECT questionOptions.Value, questionOptions.OptionID, IFNULL(Votes, 0) AS Votes FROM questionOptions LEFT JOIN (SELECT vote.OptionID, count(*) AS Votes FROM vote GROUP BY OptionID) AS votes ON votes.OptionID = questionOptions.OptionID WHERE questionOptions.QuestionID = :qid";
 								$query = $conn->prepare($getvotes);
 								$query->bindParam(':qid', $question_id);
 								$query->execute();
@@ -249,6 +256,13 @@
 				if(isElectionValid($post_schoolusername, $post_electionid))
 				{
 					$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+				
+					// GET SCHOOLS NAME FROM MYSQL
+					$getschoolid = "SELECT SchoolID,Name FROM schools WHERE Username = :name";
+					$query = $conn->prepare($getschoolid);
+					$query->bindParam(':name', $post_schoolusername);
+					$query->execute();
+					$mysql_schoolname = $query->fetchColumn();
 					
 					// CHECK IF ELECTION ID EXISTS
 					$getelectionid = "SELECT Name FROM elections WHERE ElectionID = :eid";
@@ -282,7 +296,7 @@
 						{
 							$results = $query->fetchAll(PDO::FETCH_ASSOC);
 							
-							$ret = "{ \"error\" : false , \"electionname\" : \"$mysql_electionname\"  , \"results\" : [";
+							$ret = "{ \"error\" : false , \"electionname\" : \"$mysql_electionname\" , \"schoolname\" : \"$mysql_schoolname\" , \"results\" : [";
 							
 							foreach($results as $q)
 							{
@@ -324,6 +338,44 @@
 			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
 		}
 	}
+	else if($operation == "DELETEVOTE")
+	{
+		// MAKE SURE USER IS ADMINISTRATOR AND PROPERLY SIGNED IN
+		
+		$post_userid = $data->userid;
+		$post_electionid = $data->electionid;
+		$post_schoolusername = $data->schoolusername;
+		$post_username = $_SESSION["username"];
+		
+		// CHECK IF VALID USER IS LOGGED IN
+		if(isTokenValid())
+		{
+			// THERE IS A VALID USER LOGGED IN
+			// CHECK TO SEE IF THEY ARE AN ADMINISTRATOR OF THE SCHOOL
+			if(isUserAdmin($post_schoolusername))
+			{
+				$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+				
+				$deletevote = "DELETE FROM userVote WHERE UserID = :uid AND ElectionID = :eid";
+				$query = $conn->prepare($deletevote);
+				$query->bindParam(':uid', $post_userid);
+				$query->bindParam(':eid', $post_electionid);
+				$query->execute();
+				
+				echo "{ \"error\" : false }";
+			}
+			else
+			{
+				// USER IS NOT ENROLLED IN SCHOOL
+				echo "{ \"error\" : true , \"errorcode\" : 6 , \"response\" : \"notenrolled\" }";
+			}
+		}
+		else
+		{
+			// THERE IS NOBODY LOGGED IN
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
+	}
 	else
 	{
 		// INVALID OPERATION
@@ -342,7 +394,6 @@
 			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 			
 			$checkusername = "SELECT UserID FROM users WHERE Email = :uname";
-			
 			$query = $conn->prepare($checkusername);
 			$query->bindParam(':uname', $session_username);
 			$query->execute();

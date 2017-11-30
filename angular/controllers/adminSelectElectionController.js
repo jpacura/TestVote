@@ -25,13 +25,13 @@ myApp.controller('adminSelectElectionController', ['$scope', '$http', function (
 					{
 						// NOT LOGGED IN
 						errout = "ERROR: NOT LOGGED IN!";
-						window.location.href = "logout.php";
+						window.location.href = "../logout.php";
 					}
 					else if(response.data.errorcode == 6)
 					{
 						// NOT ENROLLED IN SCHOOL
 						errout = "ERROR: NOT ENROLLED IN SELECTED SCHOOL!";
-						window.location.href = "schools.php";
+						window.location.href = "../schools.php";
 					}
 					else if(response.data.errorcode == 10)
 					{
@@ -78,8 +78,10 @@ myApp.controller('adminSelectElectionController', ['$scope', '$http', function (
 			
 			$scope.results = function (schoolid, electionid)
 			{
-				var text = "FUNCTION \"results\" NOT IMPLEMENTED YET!\nRECEIVED DATA schoolid " + schoolid + " electionid " + electionid;
-				alert(text);
+				document.getElementById("refresh").action = "results.php";
+				document.getElementById("schoolidrefresh").value = schoolid;
+				document.getElementById("electionidrefresh").value = electionid;
+				document.getElementById("refresh").submit();
 			}
 			
 			$scope.toggle = function (schoolid, electionid) {

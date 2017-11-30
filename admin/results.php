@@ -17,6 +17,7 @@
 </head>
 <body ng-app="VoteSys">
 <div ng-init='schoolid="<?php echo $_POST['school']; ?>"'></div>
+<div ng-init='electionid="<?php echo $_POST['electionid']; ?>"'></div>
 <div class="navi">
     <div class="title">
         <img src="../images/logoblack.svg">
@@ -31,21 +32,77 @@
         <h4><i class="fa fa-university" aria-hidden="true"><b> Results for {{electionname}}</b></i></h4>
     </div>
     
+    <div>
+		<h2>Election Results:</h2>
+		
+		<div ng-repeat="(questionname,answers) in resultsdata">
+			<div class="table-responsive">
+				<table class="table" rules=all frame=border>
+					<thead>
+						<tr>
+							<th>{{questionname}}:</th>
+							<th>Votes:</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="(response,votes) in answers">
+							<td>{{response}}</td>
+							<td>{{votes}}</td>
+						</tr>
+					</tbody>
+					
+				</table>
+			</div>
+		</div>
+		
+    </div>
     
+    <br>
     
-	<button ng-click="gotoadminpanel(schoolid)">Return to Admin Panel</button>
+    <div>
+		<h2>Voters:</h2>
+		
+		<div class="message">
+			<div class="alert" id="tableerrortext" ng-if="isNoVoters">{{errtext}}</div>
+		</div>
+		
+		<div class="table-responsive ng-hide" ng-show="isUsersTableVisible">
+		
+			<table class="table" rules=all frame=border>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Delete Vote</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr ng-repeat="users in voterdata">
+						<td>{{users.Name}}</td>
+						<td>{{users.Email}}</td>
+						
+						<td>
+							<button ng-click="deletevote(users.UserID, electionid)">Delete Vote</button>
+						</td>
+						
+					</tr>
+				</tbody>
+			
+			</table>
+		
+		</div>
+    </div>
+    
+	<button ng-click="gotoadminpanel(schoolid)">Return to Elections</button>
 </div>
 
 
     <!-- INVISIBLE FORM FOR POST DATA -->
-    <form method="post" id="refresh" action="elections.php">
+    <form method="post" id="refresh" action="results.php">
         <input type="hidden" id="schoolidrefresh" name="school">
-    </form>
-    
-    <!-- INVISIBLE FORM FOR POST DATA -->
-    <form method="post" id="gotopage" action="vote.php">
-        <input type="hidden" id="electionidpost" name="electionid">
-        <input type="hidden" id="schoolidpost" name="schoolid">
+        <input type="hidden" id="electionidrefresh" name="electionid">
     </form>
 </div>
 

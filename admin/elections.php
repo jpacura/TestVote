@@ -81,6 +81,7 @@
     <!-- INVISIBLE FORM FOR POST DATA -->
     <form method="post" id="refresh" action="elections.php">
         <input type="hidden" id="schoolidrefresh" name="school">
+        <input type="hidden" id="electionidrefresh" name="electionid">
     </form>
     
     <!-- INVISIBLE FORM FOR POST DATA -->
