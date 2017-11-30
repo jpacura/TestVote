@@ -40,7 +40,6 @@
             <tr>
                 <th>Student Name</th>
                 <th>Email Address</th>
-                <th>Student ID</th>
                 <th>Delete</th>
             </tr>
             </thead>
@@ -48,7 +47,6 @@
             <tr ng-repeat="x in tabledata">
                 <td>{{x.Name}}</td>
                 <td>{{x.Email}}</td>
-                <td>{{x.StudentID}}</td>
                 <td>
                     <button ng-click="removeuser(schoolid, x.Email, x.Name)">Delete Student</button>
                 </td>

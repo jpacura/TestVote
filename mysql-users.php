@@ -22,7 +22,6 @@
 		$post_fullname = $data->fname;
 		$post_username = $data->email;
 		$post_password = $data->password;
-		$post_studentid = $data->studentid;
 		$post_confirm = $data->confirm;
 		
 		$checkifexists = "SELECT Email FROM users WHERE Email = :uname";
@@ -45,13 +44,12 @@
 				$typedpwd = "$salt$post_password";
 				$typedpwd = hash('SHA512', $typedpwd);
 				
-				$register = "INSERT INTO users (Email, Password, Salt, Name, StudentID) VALUES (:uname, :pw, :salt, :fname, :sid)";
+				$register = "INSERT INTO users (Email, Password, Salt, Name) VALUES (:uname, :pw, :salt, :fname)";
 				$query = $conn->prepare($register);
 				$query->bindParam(':uname', $post_username);
 				$query->bindParam(':pw', $typedpwd);
 				$query->bindParam(':salt', $salt);
 				$query->bindParam(':fname', $post_fullname);
-				$query->bindParam(':sid', $post_studentid);
 				$query->execute();
 				echo "{ \"error\" : false , \"response\" : \"usercreated\" }";
 			}

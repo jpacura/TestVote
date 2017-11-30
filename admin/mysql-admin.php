@@ -52,7 +52,7 @@
 				
 				if($operation == "LISTUSERS")
 				{
-					$getusers = "SELECT users.UserID,users.Name,users.Email,users.StudentID FROM users LEFT JOIN enrollment ON users.UserID = enrollment.UserID WHERE enrollment.SchoolID = :sid AND enrollment.Administrator = 0";
+					$getusers = "SELECT users.UserID,users.Name,users.Email FROM users LEFT JOIN enrollment ON users.UserID = enrollment.UserID WHERE enrollment.SchoolID = :sid AND enrollment.Administrator = 0";
 				}
 				else if($operation == "LISTADMINISTRATORS")
 				{

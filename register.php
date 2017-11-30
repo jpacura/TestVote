@@ -41,15 +41,6 @@
                            name="fname" placeholder="Full Name..." required/>
                 </div>
                 <div class="form-group">
-                    <div class="alert"
-                         ng-show="registrationForm.studentid.$touched &&
-                         registrationForm.studentid.$error.required">
-                        Please input yor student ID
-                    </div>
-                    <input class="form-control" type="text" ng-model="user.studentid"
-                           name="studentid" placeholder="Student ID..." required>
-                </div>
-                <div class="form-group">
                     <div ng-show="registrationForm.email.$touched">
                         <div class="alert" ng-show="registrationForm.email.$error.required">
                             Email address can't be empty.

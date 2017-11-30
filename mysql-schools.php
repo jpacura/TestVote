@@ -105,7 +105,7 @@
 			if($numrows == 0)
 			{
 				// NOT ENROLLED IN ANY SCHOOLS
-				echo "{ \"error\" : true , \"errorcode\" : 6 , \"response\" : \"notenrolled\" }";
+				echo "{ \"error\" : true , \"errorcode\" : 6 , \"response\" : \"notenrolled\" , \"name\" : \"$mysql_username\" }";
 			}
 			else
 			{

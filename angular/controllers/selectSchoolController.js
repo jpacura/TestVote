@@ -30,6 +30,7 @@ myApp.controller('selectSchoolController', ['$scope', '$http', function ($scope,
 						errout = "You are not currently enrolled in any schools!";
 					}
 					
+					$scope.studentusername = response.data.name;
 					$scope.errtext = errout;
 					$scope.isTableVisible = false;
 					$scope.isNotEnrolled = true;
