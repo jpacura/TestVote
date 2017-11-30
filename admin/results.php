@@ -30,6 +30,9 @@
         <h3><i class="fa fa-smile-o" aria-hidden="true"><b> Welcome, {{studentusername}}</b></i></h3>
         <h4><i class="fa fa-university" aria-hidden="true"><b> Results for {{electionname}}</b></i></h4>
     </div>
+    
+    
+    
 	<button ng-click="gotoadminpanel(schoolid)">Return to Admin Panel</button>
 </div>
 

@@ -126,6 +126,204 @@
 			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
 		}
 	}
+	else if($operation == "VIEWRESULTS")
+	{
+		// MAKE SURE USER IS ADMINISTRATOR AND PROPERLY SIGNED IN
+		
+		$post_schoolusername = $data->schoolusername;
+		$post_electionid = $data->electionid;
+		$post_username = $_SESSION["username"];
+		
+		// CHECK IF VALID USER IS LOGGED IN
+		if(isTokenValid())
+		{
+			// THERE IS A VALID USER LOGGED IN
+			// CHECK TO SEE IF THEY ARE AN ADMINISTRATOR OF THE SCHOOL
+			if(isUserAdmin($post_schoolusername))
+			{
+				if(isElectionValid($post_schoolusername, $post_electionid))
+				{
+					$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+					
+					// CHECK IF ELECTION ID EXISTS
+					$getelectionid = "SELECT Name FROM elections WHERE ElectionID = :eid";
+					$query = $conn->prepare($getelectionid);
+					$query->bindParam(':eid', $post_electionid);
+					$query->execute();
+					$numrows = $query->rowCount();
+					
+					if($numrows == 0)
+					{
+						// NO ELECTION FOUND
+						echo "{ \"error\" : true , \"errorcode\" : 11 , \"response\" : \"electioninvalid\" }";
+					}
+					else
+					{
+						$mysql_electionname = $query->fetchColumn();
+						
+						// GET ALL QUESTIONS FOR THIS ELECTION
+						$getquestions = "SELECT QuestionID, Name FROM question WHERE ElectionID = :eid";
+						$query = $conn->prepare($getquestions);
+						$query->bindParam(':eid', $post_electionid);
+						$query->execute();
+						$numrows = $query->rowCount();
+						
+						if($numrows == 0)
+						{
+							// ELECTION HAS NO QUESTIONS
+							// IMPOSSIBLE TO DO WITHOUT HACKING
+							echo "{ \"error\" : true , \"errorcode\" : 11 , \"response\" : \"electioninvalid\" }";
+						}
+						else
+						{
+							$results = $query->fetchAll(PDO::FETCH_ASSOC);
+							
+							$ret = "{ \"error\" : false , \"electionname\" : \"$mysql_electionname\" , \"results\" : {";
+							
+							foreach($results as $q)
+							{
+								$question_name =  $q["Name"];
+								$question_id = $q["QuestionID"];
+								
+								$ret = "$ret \"$question_name\" : {";
+								
+								$getvotes = "SELECT questionOptions.Value, vote.OptionID, count(*) AS Votes FROM vote LEFT JOIN questionOptions ON questionOptions.OptionID = vote.OptionID WHERE questionOptions.QuestionID = :qid GROUP BY vote.OptionID";
+								$query = $conn->prepare($getvotes);
+								$query->bindParam(':qid', $question_id);
+								$query->execute();
+								$voteresults = $query->fetchAll(PDO::FETCH_ASSOC);
+								
+								foreach($voteresults as $option)
+								{
+									$option_value = $option["Value"];
+									$option_votes = $option["Votes"];
+									
+									$ret = "$ret \"$option_value\" : $option_votes ,";
+								}
+								
+								$ret = rtrim($ret, ",");
+								
+								$ret = "$ret } ,";
+							}
+							
+							$ret = rtrim($ret, ",");
+							
+							$ret = "$ret } }";
+							
+							echo $ret;
+						}
+					}
+				}
+				else
+				{
+					echo "{ \"error\" : true , \"errorcode\" : 11 , \"response\" : \"electioninvalid\" }";
+				}
+			}
+			else
+			{
+				// USER IS NOT ENROLLED IN SCHOOL
+				echo "{ \"error\" : true , \"errorcode\" : 6 , \"response\" : \"notenrolled\" }";
+			}
+		}
+		else
+		{
+			// THERE IS NOBODY LOGGED IN
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
+	}
+	else if($operation == "VIEWVOTERS")
+	{
+		// MAKE SURE USER IS ADMINISTRATOR AND PROPERLY SIGNED IN
+		
+		$post_schoolusername = $data->schoolusername;
+		$post_electionid = $data->electionid;
+		$post_username = $_SESSION["username"];
+		
+		// CHECK IF VALID USER IS LOGGED IN
+		if(isTokenValid())
+		{
+			// THERE IS A VALID USER LOGGED IN
+			// CHECK TO SEE IF THEY ARE AN ADMINISTRATOR OF THE SCHOOL
+			if(isUserAdmin($post_schoolusername))
+			{
+				if(isElectionValid($post_schoolusername, $post_electionid))
+				{
+					$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+					
+					// CHECK IF ELECTION ID EXISTS
+					$getelectionid = "SELECT Name FROM elections WHERE ElectionID = :eid";
+					$query = $conn->prepare($getelectionid);
+					$query->bindParam(':eid', $post_electionid);
+					$query->execute();
+					$numrows = $query->rowCount();
+					
+					if($numrows == 0)
+					{
+						// NO ELECTION FOUND
+						echo "{ \"error\" : true , \"errorcode\" : 11 , \"response\" : \"electioninvalid\" }";
+					}
+					else
+					{
+						$mysql_electionname = $query->fetchColumn();
+						
+						// GET ALL USERS WHO VOTED IN THIS ELECTION
+						$getusers = "SELECT users.Name, users.Email, users.UserID FROM users INNER JOIN userVote ON users.UserID = userVote.UserID WHERE ElectionID = :eid";
+						$query = $conn->prepare($getusers);
+						$query->bindParam(':eid', $post_electionid);
+						$query->execute();
+						$numrows = $query->rowCount();
+						
+						if($numrows == 0)
+						{
+							// NOBODY HAS VOTED IN THIS ELECTION YET
+							echo "{ \"error\" : true , \"errorcode\" : 14 , \"response\" : \"nousers\" }";
+						}
+						else
+						{
+							$results = $query->fetchAll(PDO::FETCH_ASSOC);
+							
+							$ret = "{ \"error\" : false , \"electionname\" : \"$mysql_electionname\"  , \"results\" : [";
+							
+							foreach($results as $q)
+							{
+								$voter_name =  $q["Name"];
+								$voter_email = $q["Email"];
+								$voter_userid = $q["UserID"];
+								
+								$ret = "$ret {";
+								
+								$ret = "$ret \"Name\" : \"$voter_name\", ";
+								$ret = "$ret \"Email\" : \"$voter_email\", ";
+								$ret = "$ret \"UserID\" : \"$voter_userid\"";
+								
+								$ret = "$ret } ,";
+							}
+							
+							$ret = rtrim($ret, ",");
+							
+							$ret = "$ret ] }";
+							
+							echo $ret;
+						}
+					}
+				}
+				else
+				{
+					echo "{ \"error\" : true , \"errorcode\" : 11 , \"response\" : \"electioninvalid\" }";
+				}
+			}
+			else
+			{
+				// USER IS NOT ENROLLED IN SCHOOL
+				echo "{ \"error\" : true , \"errorcode\" : 6 , \"response\" : \"notenrolled\" }";
+			}
+		}
+		else
+		{
+			// THERE IS NOBODY LOGGED IN
+			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
+		}
+	}
 	else
 	{
 		// INVALID OPERATION
@@ -242,4 +440,41 @@
 			// USER IS NOT ENROLLED
 			return 0;
 		}
+	}
+	
+	function isElectionValid($schoolusername, $electionid)
+	{
+		global $servername, $database, $username, $password;
+		
+		$post_schoolusername = $schoolusername;
+		$post_electionid = $electionid;
+		
+		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+		
+		// GET SCHOOLS ID FROM MYSQL
+		$getschoolid = "SELECT SchoolID FROM schools WHERE Username = :name";
+		$query = $conn->prepare($getschoolid);
+		$query->bindParam(':name', $post_schoolusername);
+		$query->execute();
+		$mysql_schoolid = $query->fetchColumn();
+		
+		// GET SCHOOL ID AND ELECTION ENABLED FROM MYSQL
+		$getelectionschool = "SELECT SchoolID,Enabled FROM elections WHERE ElectionID = :eid";
+		$query = $conn->prepare($getelectionschool);
+		$query->bindParam(':eid', $post_electionid);
+		$query->execute();
+		$results = $query->fetch(PDO::FETCH_ASSOC);
+		$mysql_electionschoolid = $results['SchoolID'];
+		$mysql_enabled = $results['Enabled'];
+		
+		if($mysql_schoolid == $mysql_electionschoolid)
+		{
+			// THE SCHOOL OWNS THIS ELECTION
+			if($mysql_enabled == 1)
+			{
+				// ELECTION IS ENABLED
+				return 1;
+			}
+		}
+		return 0;
 	}
