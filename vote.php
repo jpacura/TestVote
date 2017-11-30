@@ -45,7 +45,7 @@
 
                         <div ng-if="$index != 0">
                             <div ng-repeat="(id,name) in v">
-                                <input type="radio" name="{{qid}}" value="{{id}}">{{name}}
+                                <input type="radio" ng-model="formdata[qid]" name="{{qid}}" value="{{id}}">{{name}}
                             </div>
                         </div>
                     </div>
