@@ -26,7 +26,7 @@
         <div class="panel-body">
             <p class="ng-hide" id="formerrortext" ng-show="isFormError">{{errtext}}</p>
             <img src="images/logo.svg">
-            <form novalidate class="input-field" name="loginForm" method=post>
+            <form novalidate class="input-field" name="loginForm" method=post ng-enter="login()">
                 <!--form validation by angular-->
                 <div class="form-group">
                     <!--send error message when username invalid-->
