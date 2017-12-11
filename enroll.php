@@ -18,8 +18,8 @@
 <body ng-app="VoteSys">
 <div class="navi">
     <div class="title">
-        <img src="images/logoblack.svg">
-        <h3 style="padding-top: 7px">Enroll in a School</h3>
+        <img src="images/whiteLogo.png">
+        <h3 style="padding-top: 7px">Learn2Vote</h3>
     </div>
 </div>
 <div class="mainArea" ng-controller="enrollController">

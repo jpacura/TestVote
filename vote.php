@@ -14,8 +14,8 @@
 
 <div class="navi">
     <div class="title">
-        <img src="images/logoblack.svg">
-        <h3 style="padding-top: 7px">Vote!</h3>
+        <img src="images/whiteLogo.png">
+        <h3 style="padding-top: 7px">Learn2Vote</h3>
     </div>
     <a href="logout.php">Log Out</a>
 </div>

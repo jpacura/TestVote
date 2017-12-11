@@ -49,3 +49,14 @@
         margin: 0 1em;
     }
 }
+
+@media screen and (min-width: 500px){
+    .navi img {
+        padding: 5px;
+        width: 150px;
+        max-height:50px;
+    }
+    .navi .title h3{
+        display: none;
+    }
+}

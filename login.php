@@ -17,7 +17,7 @@
 <body ng-app="VoteSys">
 <div class="navi">
     <div class="title">
-        <img src="images/logoblack.svg">
+        <img src="images/whiteLogo.png">
         <h3 style="padding-top: 7px">Learn2Vote</h3>
     </div>
 </div>
