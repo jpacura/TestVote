@@ -20,7 +20,7 @@
 <div class="navi">
     <div class="title">
         <img src="images/logoblack.svg">
-        <h3 style="padding-top: 7px">Voting System</h3>
+        <h3 style="padding-top: 7px">Register a New School</h3>
     </div>
 </div>
 <div class="mainArea" ng-controller="schoolController">
@@ -54,6 +54,15 @@
                     </div>
                     <input class="form-control" type=text ng-model="school.schoolUsername"
                            name="schoolUsername" placeholder="School Username" required/>
+                </div>
+                <div class="form-group">
+                    <div class="alert"
+                         ng-show="registrationForm.zipCode.$touched &&
+                         registrationForm.zipCode.$error.required">
+                        Please input school zip code.
+                    </div>
+                    <input class="form-control" type=text ng-model="school.zipCode" ng-pattern="onlyNumbers"
+                           name="zipCode" placeholder="School Zip code" required/>
                 </div>
                 <button type="button" value="Register Student"
                         ng-disabled="registrationForm.$invalid" ng-click="register(school)">

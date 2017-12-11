@@ -18,7 +18,7 @@
 <div class="navi">
     <div class="title">
         <img src="images/logoblack.svg">
-        <h3 style="padding-top: 7px">Voting System</h3>
+        <h3 style="padding-top: 7px">Learn2Vote</h3>
     </div>
 </div>
 <div class="mainArea" ng-controller="loginController">
@@ -68,7 +68,7 @@
             </form>
             <div class="registerLink">
                 <!-- <span><input type="checkbox">Remember me</span> -->
-                <a href="register.php">New to NYITVoting? Register here!</a>
+                <a href="register.php">New to Learn2Vote? Register here!</a>
             </div>
         </div>
     </div>

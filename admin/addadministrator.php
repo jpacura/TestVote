@@ -20,7 +20,7 @@
 <div class="navi">
     <div class="title">
         <img src="../images/logoblack.svg">
-        <h3 style="padding-top: 7px">Voting System</h3>
+        <h3 style="padding-top: 7px">Add New Administrator</h3>
     </div>
 </div>
 <div class="mainArea" ng-controller="adminEnrollController">

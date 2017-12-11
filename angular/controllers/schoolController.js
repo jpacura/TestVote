@@ -1,6 +1,8 @@
 
 myApp.controller('schoolController', ['$scope', '$http', function ($scope, $http) {
 
+	$scope.onlyNumbers = /^\d{1,5}$/;
+
 	var RegisterData = "{\"operation\" : \"TOKEN\"}";
 
 	console.log("JSON sent to server:" + RegisterData);

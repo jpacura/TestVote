@@ -25,6 +25,7 @@
 		
 			$post_schoolname = $data->schoolFullName;
 			$post_schoolusername = $data->schoolUsername;
+			$post_schoolzipcode = $data->zipCode;
 			$post_username = $_SESSION["username"];
 			
 			// MAKE SURE NEW SCHOOL DOES NOT ALREADY EXIST
@@ -41,10 +42,11 @@
 			else
 			{
 				// ADD SCHOOL TO MYSQL
-				$register = "INSERT INTO schools (Name, Username) VALUES (:name, :uname)";
+				$register = "INSERT INTO schools (Name, Username, Zipcode) VALUES (:name, :uname, :zc)";
 				$query = $conn->prepare($register);
 				$query->bindParam(':name', $post_schoolname);
 				$query->bindParam(':uname', $post_schoolusername);
+				$query->bindParam(':zc', $post_schoolzipcode);
 				$query->execute();
 				
 				// GET USERS ID FROM MYSQL
