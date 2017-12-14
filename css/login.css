@@ -14,6 +14,7 @@
 .login .panel-body img {
     margin: 0 auto 1em;
     max-height: 5.5em;
+    display: block;
 }
 
 .login span {
