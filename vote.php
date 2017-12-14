@@ -57,6 +57,14 @@
             <input type="hidden" id="electionidpost" name="electionid">
         </form>
     </div>
+    
+    <!-- INVISIBLE FORM FOR POST DATA -->
+    <form method="post" id="gotopage" action="thankyou.php">
+        <input type="hidden" id="electionidpost" name="electionid">
+        <input type="hidden" id="schoolidpost" name="schoolid">
+        <input type="hidden" id="voteidpost" name="voteid">
+    </form>
+    
 </div>
 </body>
 <script src="angular/dependence/angular.min.js"></script>

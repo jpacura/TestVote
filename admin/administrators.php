@@ -19,7 +19,7 @@
 <div ng-init='schoolid="<?php echo $_POST['school']; ?>"'></div>
 <div class="navi">
     <div class="title">
-        <img src="../images/logoblack.svg">
+        <img src="../images/whiteLogo.png">
         <h3 style="padding-top: 7px">School Administrators</h3>
     </div>
     <a href="../logout.php">Log Out</a>

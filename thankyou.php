@@ -35,8 +35,9 @@
 		</p>
 		<div>
 			<button>Yes</button>
-			<button>No</button>
+			<button onclick='window.location.href = "schools.php";'>No</button>
 		</div>
+		<p><?php echo $_POST['schoolid']; ?></p>
     </div>
     
 </div>

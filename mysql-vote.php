@@ -227,7 +227,7 @@
 						}
 						else
 						{
-							echo "{ \"error\" : false }";
+							echo "{ \"error\" : false , \"voteid\" : $vote_id }";
 						}
 					}
 					else

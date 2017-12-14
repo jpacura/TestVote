@@ -41,6 +41,7 @@
     color: #000000;
 }
 
+/*
 @media screen and (max-width: 500px){
     .navi img{
         display: none;
@@ -59,4 +60,4 @@
     .navi .title h3{
         display: none;
     }
-}
+}*/
