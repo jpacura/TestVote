@@ -34,7 +34,6 @@
     <div class="mainArea">
         <form method="POST">
 			<div class="table-responsive">
-				<p>{{temp}}</p>
 				<table class="table" rules=all frame=border>
 					<thead>
 						<tr><th>Question:</th><th>Answer:</th></tr>

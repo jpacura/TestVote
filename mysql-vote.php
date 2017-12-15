@@ -342,7 +342,7 @@
 		$mysql_schoolid = $query->fetchColumn();
 		
 		$fields = "(SchoolID";
-		$values = "(17";
+		$values = "($mysql_schoolid";
 		
 		foreach($post_survey as $k => $v)
 		{
@@ -359,6 +359,8 @@
 		$insert_query = "INSERT INTO exitPoll $fields VALUES $values";
 		$query = $conn->prepare($insert_query);
 		$query->execute();
+		
+		echo json_encode($insert_query);
 	}
 	else
 	{

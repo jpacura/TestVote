@@ -58,8 +58,6 @@ myApp.controller('exitPollController', ['$scope', '$http', function ($scope, $ht
 						function successCallback(response) {
 							console.log('server says:' + response.data);
 							
-							$scope.temp = response.data;
-							
 							if(response.data.error)
 							{
 								window.location.href = "logout.php";
