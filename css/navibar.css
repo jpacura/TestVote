@@ -40,7 +40,6 @@
     color: #000000;
 }
 
-/*
 @media screen and (max-width: 500px){
     .navi img{
         display: none;
@@ -55,4 +54,4 @@
         padding: 10px;
         max-height:60px;
     }
-}*/
+}
