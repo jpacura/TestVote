@@ -171,7 +171,7 @@ myApp.controller('voteController', ['$scope', '$http', function ($scope, $http) 
 					// NO ERRORS
 					
 					document.getElementById("schoolidpost").value = $scope.schoolid;
-					document.getElementById("electionidpost").value = $scope.schoolid;
+					document.getElementById("electionidpost").value = $scope.electionid;
 					document.getElementById("voteidpost").value = response.data.voteid;
 					document.getElementById("gotopage").submit();
 				}

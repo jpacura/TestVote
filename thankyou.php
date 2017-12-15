@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>TestVote - Vote!</title>
+    <title>Thank You!</title>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/angular-material.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -12,6 +12,7 @@
 <body ng-app="VoteSys">
 <div ng-init='schoolid="<?php echo $_POST['schoolid']; ?>"'></div>
 <div ng-init='electionid="<?php echo $_POST['electionid']; ?>"'></div>
+<div ng-init='voteid="<?php echo $_POST['voteid']; ?>"'></div>
 
 <div class="navi">
     <div class="title">
@@ -34,11 +35,17 @@
 			Would you like to fill out an anonymous survey about the election?
 		</p>
 		<div>
-			<button>Yes</button>
+			<button ng-click='gotoexitpoll(schoolid, electionid, voteid)'>Yes</button>
 			<button onclick='window.location.href = "schools.php";'>No</button>
 		</div>
-		<p><?php echo $_POST['schoolid']; ?></p>
     </div>
+    
+    <!-- INVISIBLE FORM FOR POST DATA -->
+    <form method="post" id="gotopage" action="exitpoll.php">
+        <input type="hidden" id="electionidpost" name="electionid">
+        <input type="hidden" id="schoolidpost" name="schoolid">
+        <input type="hidden" id="voteidpost" name="voteid">
+    </form>
     
 </div>
 </body>

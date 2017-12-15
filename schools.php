@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>TestVote - Select School</title>
+    <title>Learn2Vote - Select School</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navibar.css">
     <link rel="stylesheet" href="css/selectSchool.css">
