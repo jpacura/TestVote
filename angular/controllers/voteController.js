@@ -169,7 +169,11 @@ myApp.controller('voteController', ['$scope', '$http', function ($scope, $http) 
 				else
 				{
 					// NO ERRORS
-					window.location.href = "thankyou.php";
+					
+					document.getElementById("schoolidpost").value = $scope.schoolid;
+					document.getElementById("electionidpost").value = $scope.electionid;
+					document.getElementById("voteidpost").value = response.data.voteid;
+					document.getElementById("gotopage").submit();
 				}
 				
 			},

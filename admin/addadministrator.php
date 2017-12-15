@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add an Administrator - TestVote</title>
+    <title>Add an Administrator - Learn2Vote</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/navibar.css">
     <link rel="stylesheet" href="../css/registerstudent.css">
@@ -19,7 +19,7 @@
 <div ng-init='schoolid="<?php echo $_POST['school']; ?>"'></div>
 <div class="navi">
     <div class="title">
-        <img src="../images/logoblack.svg">
+        <img src="../images/whiteLogo.png">
         <h3 style="padding-top: 7px">Add New Administrator</h3>
     </div>
 </div>

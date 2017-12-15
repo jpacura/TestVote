@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>TestVote - Election Results</title>
+    <title>Learn2Vote - Election Results</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/navibar.css">
     <link rel="stylesheet" href="../css/elections.css">
@@ -20,7 +20,7 @@
 <div ng-init='electionid="<?php echo $_POST['electionid']; ?>"'></div>
 <div class="navi">
     <div class="title">
-        <img src="../images/logoblack.svg">
+        <img src="../images/whiteLogo.png">
         <h3 style="padding-top: 7px">Election Results</h3>
     </div>
     <a href="../logout.php">Log Out</a>

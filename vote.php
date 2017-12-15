@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>TestVote - Vote!</title>
+    <title>Learn2Vote - Vote!</title>
     <link rel="stylesheet" href="css/angular-material.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navibar.css">
@@ -53,10 +53,16 @@
             </div>
             <br>
             <button ng-click="submitvotes()">Vote!</button>
-            <input type="hidden" id="schoolidpost" name="schoolid">
-            <input type="hidden" id="electionidpost" name="electionid">
         </form>
     </div>
+    
+    <!-- INVISIBLE FORM FOR POST DATA -->
+    <form method="post" id="gotopage" action="thankyou.php">
+        <input type="hidden" id="electionidpost" name="electionid">
+        <input type="hidden" id="schoolidpost" name="schoolid">
+        <input type="hidden" id="voteidpost" name="voteid">
+    </form>
+    
 </div>
 </body>
 <script src="angular/dependence/angular.min.js"></script>

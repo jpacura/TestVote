@@ -227,7 +227,7 @@
 						}
 						else
 						{
-							echo "{ \"error\" : false }";
+							echo "{ \"error\" : false , \"voteid\" : $vote_id }";
 						}
 					}
 					else
@@ -254,6 +254,111 @@
 			// TOKEN IS NOT VALID
 			echo "{ \"error\" : true , \"errorcode\" : 5 , \"response\" : \"notloggedin\" }";
 		}
+	}
+	else if($operation == "EXITPOLLLOAD")
+	{
+		$post_schoolusername = $data->schoolusername;
+		$post_electionid = $data->electionid;
+		$post_voteid = $data->voteid;
+		
+		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+		
+		//ENSURE THAT A VOTE HAS JUST BEEN DONE, BUT NOT AN EXIT POLL
+		$checkifvoted = "SELECT ExitPollCompleted FROM userVote WHERE VoteID = :vid";
+		$query = $conn->prepare($checkifvoted);
+		$query->bindParam(':vid', $post_voteid);
+		$query->execute();
+		$rowcount = $query->rowCount();
+		
+		if($rowcount == 0)
+		{
+			// NO ELECTION DATA HAS BEEN POSTED
+			echo "{ \"error\" : true }";
+		}
+		else
+		{
+			// GET SCHOOLS ID FROM MYSQL
+			$getschoolid = "SELECT SchoolID FROM schools WHERE Username = :name";
+			$query = $conn->prepare($getschoolid);
+			$query->bindParam(':name', $post_schoolusername);
+			$query->execute();
+			$mysql_schoolid = $query->fetchColumn();
+			
+			// CHECK IF SCHOOL OWNS ELECTION
+			$checkelection = "SELECT * FROM elections WHERE ElectionID = :eid AND SchoolID = :sid";
+			$query = $conn->prepare($checkelection);
+			$query->bindParam(':eid', $post_electionid);
+			$query->bindParam(':sid', $mysql_schoolid);
+			$query->execute();
+			$rowcount = $query->rowCount();
+			
+			if($rowcount == 0)
+			{
+				// SCHOOL DOES NOT OWN ELECTION OR ELECTION DOES NOT EXIST
+				echo "{ \"error\" : true }";
+			}
+			else
+			{
+				// CHECK IF VOTE WAS CAST FOR THIS ELECTION
+				$checkvote = "SELECT * FROM userVote WHERE ElectionID = :eid AND VoteID = :vid AND ExitPollCompleted = 0";
+				$query = $conn->prepare($checkvote);
+				$query->bindParam(':eid', $post_electionid);
+				$query->bindParam(':vid', $post_voteid);
+				$query->execute();
+				$rowcount = $query->rowCount();
+				
+				if($rowcount == 0)
+				{
+					// VOTE DOES NOT BELONG TO SPECIFIED ELECTION OR DOES NOT EXIST
+					echo "{ \"error\" : true }";
+				}
+				else
+				{
+					echo "{ \"error\" : false }";
+				}
+			}
+		}
+	}
+	else if($operation == "EXITPOLLVOTE")
+	{
+		$post_schoolusername = $data->schoolusername;
+		$post_electionid = $data->electionid;
+		$post_voteid = $data->voteid;
+		$post_survey = $data->survey;
+		
+		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+		
+		// MARK EXIT VOTE AS COMPLETED
+		$updatevote = "UPDATE userVote SET ExitPollCompleted = 1 WHERE VoteID = :vid";
+		$query = $conn->prepare($updatevote);
+		$query->bindParam(':vid', $post_voteid);
+		$query->execute();
+		
+		// GET SCHOOLS ID FROM MYSQL
+		$getschoolid = "SELECT SchoolID FROM schools WHERE Username = :name";
+		$query = $conn->prepare($getschoolid);
+		$query->bindParam(':name', $post_schoolusername);
+		$query->execute();
+		$mysql_schoolid = $query->fetchColumn();
+		
+		$fields = "(SchoolID";
+		$values = "(17";
+		
+		foreach($post_survey as $k => $v)
+		{
+			$a = htmlspecialchars($k);
+			$b = htmlspecialchars($v);
+			
+			$fields = "$fields, $a";
+			$values = "$values, \"$b\"";
+		}
+		
+		$fields = "$fields)";
+		$values = "$values)";
+		
+		$insert_query = "INSERT INTO exitPoll $fields VALUES $values";
+		$query = $conn->prepare($insert_query);
+		$query->execute();
 	}
 	else
 	{
