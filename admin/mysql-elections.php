@@ -521,11 +521,7 @@
 		if($mysql_schoolid == $mysql_electionschoolid)
 		{
 			// THE SCHOOL OWNS THIS ELECTION
-			if($mysql_enabled == 1)
-			{
-				// ELECTION IS ENABLED
-				return 1;
-			}
+			return 1;
 		}
 		return 0;
 	}
