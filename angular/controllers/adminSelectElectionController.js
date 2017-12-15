@@ -76,6 +76,13 @@ myApp.controller('adminSelectElectionController', ['$scope', '$http', function (
 				document.getElementById("refresh").submit();
 			}
 			
+			$scope.exitpolls = function (schoolid)
+			{
+				document.getElementById("refresh").action = "metadata.php";
+				document.getElementById("schoolidrefresh").value = schoolid;
+				document.getElementById("refresh").submit();
+			}
+			
 			$scope.results = function (schoolid, electionid)
 			{
 				document.getElementById("refresh").action = "results.php";

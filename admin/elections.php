@@ -75,6 +75,7 @@
         </table>
         <button ng-click="gotoadminpanel(schoolid)">Return to Admin Panel</button>
         <button ng-click="createelection(schoolid)">Create a New Election</button>
+        <button ng-click="exitpolls(schoolid)">View Exit Poll Results</button>
     </div>
 
 
